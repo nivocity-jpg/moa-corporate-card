@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MOA CORPORATE CARD</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,7 +34,7 @@ body {
 body::before {
   content: '✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧';
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   font-size: 11px;
   color: rgba(128,206,215,0.15);
   letter-spacing: 2.8em;
@@ -88,19 +88,18 @@ header p {
 .card-stage {
   position: relative;
   z-index: 1;
-  animation: floatUp 0.7s 0.1s ease both;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   width: 100%;
   max-width: 480px;
+  animation: floatUp 0.7s 0.1s ease both;
 }
 
 /* ── THE CARD ── */
 #id-card {
   width: 100%;
-  max-width: 480px;
   border-radius: 20px;
   background: #ffffff;
   font-family: 'DM Sans', sans-serif;
@@ -160,21 +159,52 @@ header p {
   padding: 10px 20px 14px;
 }
 
-/* Photo slot — display only, no input inside */
+/* Photo slot — tapping opens file picker via label */
 .card-photo-slot {
   flex-shrink: 0;
   width: 100px; height: 120px;
   border-radius: 14px;
-  border: 2px solid rgba(128,206,215,0.3);
+  border: 2px dashed rgba(128,206,215,0.5);
   overflow: hidden;
   background: var(--soft-bg);
   display: flex; align-items: center; justify-content: center;
   flex-direction: column;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, background 0.2s;
+  position: relative;
+  cursor: pointer;
 }
-.card-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: none; }
-.photo-placeholder-icon { font-size: 28px; opacity: 0.3; line-height: 1; }
-.photo-placeholder-txt  { font-size: 8px; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; margin-top: 4px; text-align: center; opacity: 0.7; }
+/* The label covers the whole slot — triggers file input on tap */
+.card-photo-slot label {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+.card-photo-slot input[type="file"] {
+  /* visually hidden but reachable by label */
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+  left: 0; top: 0;
+}
+.card-photo-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: none;
+  z-index: 1;
+}
+.photo-ph-icon { font-size: 26px; opacity: 0.35; }
+.photo-ph-txt  {
+  font-size: 8px; font-weight: 700;
+  color: var(--muted); letter-spacing: 0.06em;
+  text-align: center; opacity: 0.8;
+}
 
 .card-info {
   flex: 1;
@@ -184,9 +214,7 @@ header p {
   justify-content: center;
   min-width: 0;
 }
-
 .card-field { display: flex; flex-direction: column; gap: 2px; }
-
 .card-lbl {
   font-size: 6.5px;
   font-weight: 800;
@@ -195,27 +223,23 @@ header p {
   color: var(--muted);
   transition: color 0.3s;
 }
-
 .card-editable {
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.01em;
   color: var(--txt-deep);
-  line-height: 1.2;
   background: transparent;
   border: none;
   border-bottom: 1.5px dashed transparent;
   outline: none;
   width: 100%;
   padding: 1px 0;
-  cursor: text;
   min-width: 0;
   transition: border-bottom-color 0.2s, color 0.3s;
 }
 .card-editable:focus { border-bottom-color: rgba(128,206,215,0.6); }
-.card-editable::placeholder { color: rgba(144,180,200,0.5); font-weight: 600; }
-
+.card-editable::placeholder { color: rgba(144,180,200,0.5); }
 .card-name-val {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 17px;
@@ -223,7 +247,6 @@ header p {
   letter-spacing: 0.04em;
   color: var(--txt-blue);
 }
-
 .card-select-wrap { position: relative; }
 .card-select-wrap::after {
   content: '▾';
@@ -251,13 +274,12 @@ header p {
   transition: border-bottom-color 0.2s, color 0.3s;
 }
 .card-select:focus { border-bottom-color: rgba(128,206,215,0.6); }
-
 .bias-pill-wrap {
   display: inline-flex;
   align-items: center;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
   border-radius: 99px;
-  padding: 3px 10px 3px 10px;
+  padding: 3px 10px;
   max-width: 100%;
   transition: background 0.3s;
 }
@@ -273,7 +295,7 @@ header p {
   appearance: none;
   cursor: pointer;
   min-width: 0;
-  max-width: 170px;
+  max-width: 180px;
   text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 .bias-pill-select option { background: #1e4d6b; color: white; }
@@ -287,12 +309,9 @@ header p {
   transition: background 0.3s, border-color 0.3s;
 }
 .card-fact-lbl {
-  font-size: 6.5px;
-  font-weight: 800;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 2px;
+  font-size: 6.5px; font-weight: 800;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 2px;
   transition: color 0.3s;
 }
 
@@ -304,38 +323,42 @@ header p {
   gap: 10px;
 }
 .card-sig-lbl {
-  font-size: 6.5px;
-  font-weight: 800;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 3px;
+  font-size: 6.5px; font-weight: 800;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 3px;
   transition: color 0.3s;
 }
-/* On the card: show a static image of the drawn signature */
-.card-sig-preview {
-  border-bottom: 1.5px solid rgba(128,206,215,0.4);
-  height: 40px;
-  display: flex;
-  align-items: flex-end;
+
+/* Signature area on card — tap to open modal */
+.card-sig-tap {
   flex: 1;
+  border-bottom: 1.5px solid rgba(128,206,215,0.4);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
   transition: border-color 0.3s;
+  -webkit-tap-highlight-color: transparent;
 }
-.card-sig-preview img {
-  max-height: 36px;
+.card-sig-tap img {
+  max-height: 40px;
   max-width: 180px;
   display: none;
 }
-.card-sig-empty {
-  font-size: 9px;
-  color: rgba(144,180,200,0.45);
+.card-sig-tap .sig-prompt {
+  font-size: 10px;
   font-weight: 600;
-  padding-bottom: 4px;
+  color: rgba(128,206,215,0.7);
   letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
+.sig-prompt-icon { font-size: 14px; }
+
 .card-id-num {
-  font-size: 8px;
-  font-weight: 700;
+  font-size: 8px; font-weight: 700;
   letter-spacing: 0.15em;
   color: rgba(144,180,200,0.6);
   white-space: nowrap;
@@ -353,7 +376,6 @@ header p {
   z-index: 1;
   animation: floatUp 0.7s 0.15s ease both;
 }
-
 .ctrl-row {
   background: rgba(255,255,255,0.75);
   backdrop-filter: blur(12px);
@@ -361,103 +383,24 @@ header p {
   border-radius: 16px;
   padding: 14px 16px;
 }
-
 .ctrl-label {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font-size: 10px; font-weight: 800;
+  letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--txt-blue);
   margin-bottom: 10px;
   display: block;
 }
-
-/* Colour swatches */
-.swatches { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
 .swatch {
   width: 36px; height: 36px;
   border-radius: 50%;
   border: 3px solid transparent;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
 }
 .swatch.active { box-shadow: 0 0 0 2px white, 0 0 0 5px var(--txt-deep); }
-
-/* Photo upload — label wrapping input, the iOS-safe pattern */
-.photo-upload-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-/* The actual input — visible and accessible, just styled */
-.photo-upload-label input[type="file"] {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--txt-blue);
-  background: rgba(128,206,215,0.1);
-  border: 1.5px solid rgba(128,206,215,0.4);
-  border-radius: 10px;
-  padding: 8px 12px;
-  cursor: pointer;
-  flex: 1;
-  /* Show the native file picker — most reliable on iOS */
-}
-.photo-preview-thumb {
-  width: 48px; height: 48px;
-  border-radius: 10px;
-  border: 2px solid rgba(128,206,215,0.4);
-  object-fit: cover;
-  display: none;
-  flex-shrink: 0;
-}
-
-/* Signature canvas — standalone in controls bar */
-.sig-canvas-wrap {
-  width: 100%;
-  border-radius: 12px;
-  border: 1.5px solid rgba(128,206,215,0.4);
-  background: rgba(255,255,255,0.9);
-  overflow: hidden;
-  /* touch-action none on the wrapper */
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-  cursor: crosshair;
-}
-.sig-canvas-wrap canvas {
-  display: block;
-  width: 100%;
-  height: 80px;
-  touch-action: none;
-}
-.sig-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.btn-sm {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: rgba(238,247,255,0.8);
-  border: 1.5px solid rgba(128,206,215,0.45);
-  color: var(--muted);
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  min-height: 38px;
-  transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
-}
-.btn-sm:active { border-color: var(--sky); color: var(--txt-blue); background: rgba(128,206,215,0.1); }
 
 .btn-download {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -480,6 +423,107 @@ header p {
 }
 .btn-download:active { box-shadow: 0 2px 8px rgba(128,206,215,0.3); }
 
+/* ═══════════════════════════════
+   SIGNATURE MODAL
+═══════════════════════════════ */
+.sig-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 40, 60, 0.55);
+  backdrop-filter: blur(4px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.sig-modal.open { display: flex; }
+
+.sig-modal-box {
+  background: white;
+  border-radius: 24px;
+  padding: 24px 20px 20px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sig-modal-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--txt-deep);
+  letter-spacing: 0.04em;
+}
+.sig-modal-hint {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: -8px;
+}
+
+/* The drawing canvas inside the modal */
+.sig-modal-canvas-wrap {
+  width: 100%;
+  border-radius: 14px;
+  border: 2px solid rgba(128,206,215,0.45);
+  background: #f8fdff;
+  overflow: hidden;
+  /* touch-action none is critical — no competing scroll here */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: crosshair;
+  /* give it a generous height so it's easy to draw on */
+  height: 160px;
+}
+.sig-modal-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 160px;
+  touch-action: none;
+}
+
+.sig-modal-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn-ghost {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(238,247,255,0.9);
+  border: 1.5px solid rgba(128,206,215,0.45);
+  color: var(--muted);
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px;
+  transition: all 0.15s;
+}
+.btn-ghost:active { border-color: var(--sky); color: var(--txt-blue); }
+.btn-confirm {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #80CED7, #3a9bbf);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  flex: 1;
+  min-height: 44px;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 3px 12px rgba(128,206,215,0.4);
+}
+
 @keyframes floatUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -496,7 +540,7 @@ header p {
 
 <div class="card-stage">
 
-  <!-- ── THE CARD (display only — no inputs inside except text/select) ── -->
+  <!-- ══ THE CARD ══ -->
   <div id="id-card">
 
     <div class="card-stripe"></div>
@@ -511,11 +555,14 @@ header p {
 
     <div class="card-body">
 
-      <!-- Photo — static display, updated by JS from the upload below -->
+      <!-- Photo slot: label wraps a hidden file input — most reliable iOS pattern -->
       <div class="card-photo-slot" id="card-photo-slot">
         <img id="card-photo" alt="photo" />
-        <div class="photo-placeholder-icon" id="photo-icon">📷</div>
-        <div class="photo-placeholder-txt" id="photo-txt">PHOTO<br>HERE</div>
+        <label for="photo-input">
+          <div class="photo-ph-icon" id="photo-ph-icon">📷</div>
+          <div class="photo-ph-txt" id="photo-ph-txt">TAP TO<br>ADD PHOTO</div>
+        </label>
+        <input type="file" id="photo-input" accept="image/*" />
       </div>
 
       <div class="card-info">
@@ -523,7 +570,8 @@ header p {
         <div class="card-field">
           <div class="card-lbl">Employee Name</div>
           <input class="card-editable card-name-val" id="card-name"
-            type="text" placeholder="Your Name" maxlength="24" spellcheck="false" autocomplete="off" />
+            type="text" placeholder="Your Name" maxlength="24"
+            spellcheck="false" autocomplete="off" />
         </div>
 
         <div class="card-field">
@@ -566,9 +614,13 @@ header p {
     <div class="card-footer">
       <div style="flex:1;min-width:0;">
         <div class="card-sig-lbl">Signature</div>
-        <div class="card-sig-preview" id="card-sig-preview">
+        <!-- Tapping this opens the modal -->
+        <div class="card-sig-tap" id="card-sig-tap" onclick="openSigModal()">
           <img id="card-sig-img" alt="signature" />
-          <span class="card-sig-empty" id="card-sig-empty">sign below ↓</span>
+          <div class="sig-prompt" id="sig-prompt">
+            <span class="sig-prompt-icon">✍️</span>
+            <span>Tap to sign</span>
+          </div>
         </div>
       </div>
       <div style="text-align:right;padding-left:10px;">
@@ -578,10 +630,9 @@ header p {
 
   </div><!-- /id-card -->
 
-  <!-- ── CONTROLS BAR ── -->
+  <!-- ══ CONTROLS ══ -->
   <div class="controls-bar">
 
-    <!-- Card colour -->
     <div class="ctrl-row">
       <span class="ctrl-label">Card Colour</span>
       <div class="swatches">
@@ -593,37 +644,33 @@ header p {
       </div>
     </div>
 
-    <!-- Photo upload — plain <label> wrapping <input type="file">, most iOS-safe -->
-    <div class="ctrl-row">
-      <span class="ctrl-label">Photo</span>
-      <label class="photo-upload-label">
-        <input type="file" id="photo-input" accept="image/*" />
-        <img class="photo-preview-thumb" id="photo-thumb" alt="preview" />
-      </label>
-    </div>
-
-    <!-- Signature canvas — lives here, outside the card -->
-    <div class="ctrl-row">
-      <span class="ctrl-label">Signature — draw below</span>
-      <div class="sig-canvas-wrap" id="sig-wrap">
-        <canvas id="sig-canvas"></canvas>
-      </div>
-      <div class="sig-actions">
-        <button class="btn-sm" onclick="clearSig()" type="button">Clear</button>
-        <button class="btn-sm" onclick="undoSig()" type="button">Undo</button>
-      </div>
-    </div>
-
-    <!-- Download -->
     <button class="btn-download" onclick="downloadCard()" type="button">↓ Download My Corporate Card</button>
 
   </div>
 
+</div><!-- /card-stage -->
+
+<!-- ══ SIGNATURE MODAL ══ -->
+<div class="sig-modal" id="sig-modal">
+  <div class="sig-modal-box">
+    <div class="sig-modal-title">✍️ Draw Your Signature</div>
+    <div class="sig-modal-hint">Use your finger to sign in the box below</div>
+
+    <div class="sig-modal-canvas-wrap" id="modal-canvas-wrap">
+      <canvas id="sig-canvas"></canvas>
+    </div>
+
+    <div class="sig-modal-actions">
+      <button class="btn-ghost" onclick="clearSig()" type="button">Clear</button>
+      <button class="btn-ghost" onclick="closeSigModal()" type="button">Cancel</button>
+      <button class="btn-confirm" onclick="confirmSig()" type="button">✓ Done</button>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-/* ── THEMES ── */
+/* ══ THEMES ══ */
 const THEMES = {
   '#B8E8ED': {
     cardBg:'#f0fbfc', cardBorder:'rgba(100,200,215,0.35)',
@@ -631,10 +678,11 @@ const THEMES = {
     badgeBg:'linear-gradient(135deg,#80CED7,#2a8fa8)',
     pillBg:'linear-gradient(135deg,#80CED7,#2a8fa8)', pillColor:'#ffffff',
     factBg:'rgba(128,206,215,0.12)', factBorder:'rgba(100,200,215,0.3)',
-    bodyText:'#1a4a5a', lblColor:'rgba(80,160,180,0.7)',
-    sigLine:'rgba(100,200,215,0.45)', photoSlotBorder:'rgba(100,200,215,0.4)',
+    bodyText:'#1a4a5a', lblColor:'rgba(80,160,180,0.75)',
+    sigLine:'rgba(100,200,215,0.5)', photoSlotBorder:'rgba(100,200,215,0.5)',
     idNum:'rgba(80,160,180,0.55)', selectColor:'#1a4a5a',
     dlBg:'linear-gradient(135deg,#80CED7,#2a8fa8)',
+    sigStroke:'#2a8fa8',
   },
   '#F4C5C0': {
     cardBg:'#fff5f4', cardBorder:'rgba(220,130,120,0.3)',
@@ -643,9 +691,10 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#F4C5C0,#d97068)', pillColor:'#ffffff',
     factBg:'rgba(244,197,192,0.2)', factBorder:'rgba(220,130,120,0.25)',
     bodyText:'#5a2020', lblColor:'rgba(180,90,85,0.65)',
-    sigLine:'rgba(220,130,120,0.4)', photoSlotBorder:'rgba(220,130,120,0.35)',
+    sigLine:'rgba(220,130,120,0.45)', photoSlotBorder:'rgba(220,130,120,0.5)',
     idNum:'rgba(180,90,85,0.5)', selectColor:'#5a2020',
     dlBg:'linear-gradient(135deg,#F4C5C0,#d97068)',
+    sigStroke:'#c05a52',
   },
   '#C3C4FC': {
     cardBg:'#f5f5ff', cardBorder:'rgba(140,142,240,0.35)',
@@ -654,9 +703,10 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)', pillColor:'#ffffff',
     factBg:'rgba(195,196,252,0.18)', factBorder:'rgba(140,142,240,0.28)',
     bodyText:'#22226a', lblColor:'rgba(100,102,200,0.65)',
-    sigLine:'rgba(140,142,240,0.4)', photoSlotBorder:'rgba(140,142,240,0.35)',
+    sigLine:'rgba(140,142,240,0.45)', photoSlotBorder:'rgba(140,142,240,0.5)',
     idNum:'rgba(100,102,200,0.5)', selectColor:'#22226a',
     dlBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)',
+    sigStroke:'#5254c0',
   },
   '#FAD4A0': {
     cardBg:'#fff9f0', cardBorder:'rgba(220,170,80,0.3)',
@@ -665,9 +715,10 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#FAD4A0,#e8a840)', pillColor:'#ffffff',
     factBg:'rgba(250,212,160,0.2)', factBorder:'rgba(220,170,80,0.25)',
     bodyText:'#5a3800', lblColor:'rgba(170,110,30,0.65)',
-    sigLine:'rgba(220,170,80,0.4)', photoSlotBorder:'rgba(220,170,80,0.35)',
+    sigLine:'rgba(220,170,80,0.45)', photoSlotBorder:'rgba(220,170,80,0.5)',
     idNum:'rgba(170,110,30,0.5)', selectColor:'#5a3800',
     dlBg:'linear-gradient(135deg,#FAD4A0,#e8a840)',
+    sigStroke:'#b07820',
   },
   '#FDED54': {
     cardBg:'#fffde8', cardBorder:'rgba(180,160,0,0.3)',
@@ -676,9 +727,10 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#e5c800,#b8a000)', pillColor:'#3a3000',
     factBg:'rgba(253,237,84,0.15)', factBorder:'rgba(180,160,0,0.25)',
     bodyText:'#3a3000', lblColor:'rgba(140,120,0,0.65)',
-    sigLine:'rgba(180,160,0,0.4)', photoSlotBorder:'rgba(180,160,0,0.35)',
+    sigLine:'rgba(180,160,0,0.45)', photoSlotBorder:'rgba(180,160,0,0.5)',
     idNum:'rgba(140,120,0,0.5)', selectColor:'#3a3000',
     dlBg:'linear-gradient(135deg,#FDED54,#c4a800)',
+    sigStroke:'#8a7500',
   },
 };
 
@@ -687,9 +739,8 @@ let activeColor = '#B8E8ED';
 function applyTheme(hex) {
   activeColor = hex;
   const t = THEMES[hex];
-  const card = document.getElementById('id-card');
-  card.style.background  = t.cardBg;
-  card.style.borderColor = t.cardBorder;
+  document.getElementById('id-card').style.background    = t.cardBg;
+  document.getElementById('id-card').style.borderColor   = t.cardBorder;
   document.getElementById('card-brand-top').style.color  = t.brandColor;
   document.getElementById('card-brand-sub').style.color  = t.lblColor;
   document.getElementById('card-badge').style.background = t.badgeBg;
@@ -700,63 +751,81 @@ function applyTheme(hex) {
   document.getElementById('card-fact-section').style.background  = t.factBg;
   document.getElementById('card-fact-section').style.borderColor = t.factBorder;
   document.getElementById('card-fact').style.color       = t.bodyText;
-  document.getElementById('card-sig-preview').style.borderBottomColor = t.sigLine;
-  document.getElementById('card-photo-slot').style.borderColor = t.photoSlotBorder;
+  document.getElementById('card-sig-tap').style.borderBottomColor = t.sigLine;
+  document.getElementById('card-photo-slot').style.borderColor   = t.photoSlotBorder;
   document.getElementById('card-idnum').style.color      = t.idNum;
   document.getElementById('btn-download') && (document.getElementById('btn-download').style.background = t.dlBg);
   document.querySelectorAll('.card-editable,.card-select').forEach(el => el.style.color = t.bodyText);
   document.getElementById('card-name').style.color = t.nameColor;
   document.querySelectorAll('.card-lbl,.card-sig-lbl,.card-fact-lbl').forEach(el => el.style.color = t.lblColor);
-  document.getElementById('card-sig-empty').style.color = t.sigLine;
-  styleCtx();
 }
 
-/* Swatch — inline onclick, most reliable on iOS */
 function pickSwatch(el) {
   document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   applyTheme(el.dataset.color);
 }
 
-/* ── PHOTO ── */
+/* ══ PHOTO ══ */
 document.getElementById('photo-input').addEventListener('change', function() {
   const file = this.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = function(ev) {
-    const url = ev.target.result;
-    // Show on card
-    const cardImg = document.getElementById('card-photo');
-    cardImg.src = url;
-    cardImg.style.display = 'block';
-    document.getElementById('photo-icon').style.display = 'none';
-    document.getElementById('photo-txt').style.display  = 'none';
-    // Show thumb in controls
-    const thumb = document.getElementById('photo-thumb');
-    thumb.src = url;
-    thumb.style.display = 'block';
+    const img = document.getElementById('card-photo');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    document.getElementById('photo-ph-icon').style.display = 'none';
+    document.getElementById('photo-ph-txt').style.display  = 'none';
   };
   reader.readAsDataURL(file);
 });
 
-/* ── SIGNATURE ── */
-const sigWrap = document.getElementById('sig-wrap');
-const canvas  = document.getElementById('sig-canvas');
-const ctx     = canvas.getContext('2d');
+/* ══ SIGNATURE MODAL ══ */
+const modal      = document.getElementById('sig-modal');
+const canvasWrap = document.getElementById('modal-canvas-wrap');
+const canvas     = document.getElementById('sig-canvas');
+const ctx        = canvas.getContext('2d');
 let drawing = false, lastX = 0, lastY = 0;
 let strokes = [], currentStroke = [];
 
-function initCanvas() {
-  const w = sigWrap.clientWidth || 300;
-  canvas.width  = w;
-  canvas.height = 80;
-  styleCtx();
-  redrawAll();
+function openSigModal() {
+  modal.classList.add('open');
+  // Prevent body scroll while modal open
+  document.body.style.overflow = 'hidden';
+  // Size canvas to its container
+  setTimeout(function() {
+    canvas.width  = canvasWrap.clientWidth;
+    canvas.height = canvasWrap.clientHeight;
+    styleCtx();
+    redrawAll();
+  }, 30);
+}
+
+function closeSigModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function confirmSig() {
+  const img    = document.getElementById('card-sig-img');
+  const prompt = document.getElementById('sig-prompt');
+  if (strokes.length > 0) {
+    img.src = canvas.toDataURL();
+    img.style.display = 'block';
+    prompt.style.display = 'none';
+  }
+  closeSigModal();
+}
+
+function clearSig() {
+  strokes = [];
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function styleCtx() {
-  ctx.strokeStyle = THEMES[activeColor]?.brandColor || '#2a8fa8';
-  ctx.lineWidth   = 2.5;
+  ctx.strokeStyle = THEMES[activeColor]?.sigStroke || '#2a8fa8';
+  ctx.lineWidth   = 3;
   ctx.lineCap     = 'round';
   ctx.lineJoin    = 'round';
 }
@@ -768,10 +837,23 @@ function getXY(e) {
   return [(e.clientX - r.left) * sx, (e.clientY - r.top) * sy];
 }
 
-/* Use pointer events — single unified API for mouse + touch + stylus */
+function redrawAll() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  styleCtx();
+  strokes.forEach(function(stroke) {
+    if (stroke.length < 2) return;
+    ctx.beginPath();
+    stroke.forEach(function([x, y], i) {
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  });
+}
+
+/* Pointer events on the modal canvas — no competing scroll exists in the modal */
 canvas.addEventListener('pointerdown', function(e) {
   e.preventDefault();
-  this.setPointerCapture(e.pointerId);
+  canvas.setPointerCapture(e.pointerId);
   drawing = true;
   [lastX, lastY] = getXY(e);
   currentStroke = [[lastX, lastY]];
@@ -790,13 +872,10 @@ canvas.addEventListener('pointermove', function(e) {
   currentStroke.push([x, y]);
 }, { passive: false });
 
-canvas.addEventListener('pointerup', function(e) {
+canvas.addEventListener('pointerup', function() {
   if (!drawing) return;
   drawing = false;
-  if (currentStroke.length > 1) {
-    strokes.push([...currentStroke]);
-    pushSigToCard();
-  }
+  if (currentStroke.length > 1) strokes.push([...currentStroke]);
   currentStroke = [];
 });
 
@@ -805,63 +884,37 @@ canvas.addEventListener('pointercancel', function() {
   currentStroke = [];
 });
 
-function redrawAll() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  styleCtx();
-  strokes.forEach(stroke => {
-    if (stroke.length < 2) return;
-    ctx.beginPath();
-    stroke.forEach(([x, y], i) => i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y));
-    ctx.stroke();
-  });
-}
+/* Close modal if tapping the dark backdrop */
+modal.addEventListener('click', function(e) {
+  if (e.target === modal) closeSigModal();
+});
 
-/* Copy canvas image up to the card preview */
-function pushSigToCard() {
-  const img = document.getElementById('card-sig-img');
-  const empty = document.getElementById('card-sig-empty');
-  if (strokes.length > 0) {
-    img.src = canvas.toDataURL();
-    img.style.display = 'block';
-    empty.style.display = 'none';
-  } else {
-    img.style.display = 'none';
-    empty.style.display = 'block';
-  }
-}
-
-function clearSig() {
-  strokes = [];
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  pushSigToCard();
-}
-
-function undoSig() {
-  strokes.pop();
-  redrawAll();
-  pushSigToCard();
-}
-
-window.addEventListener('load', function() { setTimeout(initCanvas, 100); });
-window.addEventListener('resize', function() { setTimeout(initCanvas, 100); });
-
-/* ── INIT ── */
+/* ══ INIT ══ */
 applyTheme('#B8E8ED');
 document.getElementById('card-idnum').textContent =
   'MOA-' + Math.floor(Math.random() * 99999999).toString().padStart(8, '0');
 
-/* ── DOWNLOAD ── */
+/* ══ DOWNLOAD ══ */
 function downloadCard() {
+  // Temporarily hide the "tap to sign" prompt so it doesn't appear in the download
+  const prompt = document.getElementById('sig-prompt');
+  const wasVisible = prompt.style.display !== 'none';
+  if (wasVisible && document.getElementById('card-sig-img').style.display === 'none') {
+    prompt.style.visibility = 'hidden';
+  }
   html2canvas(document.getElementById('id-card'), {
     scale: 3,
     useCORS: true,
-    backgroundColor: THEMES[activeColor].cardBg,
     allowTaint: true,
+    backgroundColor: THEMES[activeColor].cardBg,
   }).then(function(c) {
+    prompt.style.visibility = '';
     const a = document.createElement('a');
     a.download = 'moa-corporate-card.png';
     a.href = c.toDataURL('image/png');
     a.click();
+  }).catch(function() {
+    prompt.style.visibility = '';
   });
 }
 </script>
