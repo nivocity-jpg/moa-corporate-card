@@ -84,37 +84,7 @@ header p {
   letter-spacing: 0.05em;
 }
 
-/* ── Hint bar ── */
-.hint {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255,255,255,0.6);
-  border: 1.5px solid rgba(128,206,215,0.35);
-  border-radius: 99px;
-  padding: 6px 16px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--txt-blue);
-  letter-spacing: 0.06em;
-  margin-bottom: 28px;
-  backdrop-filter: blur(8px);
-  animation: floatUp 0.7s 0.05s ease both;
-}
-.hint-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--sky);
-  animation: pulse 1.8s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; transform:scale(1); }
-  50%      { opacity:0.4; transform:scale(0.7); }
-}
-
-/* ── Card wrapper ── */
+/* ── Card stage ── */
 .card-stage {
   position: relative;
   z-index: 1;
@@ -127,21 +97,18 @@ header p {
   max-width: 480px;
 }
 
-/* THE CARD */
+/* ── THE CARD ── */
 #id-card {
   width: 100%;
   max-width: 480px;
   border-radius: 20px;
   background: #ffffff;
-  overflow: visible; /* allow dropdowns to overflow */
-  font-family: 'Nunito', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   border: 2px solid rgba(128,206,215,0.3);
   box-shadow: 0 20px 60px rgba(62,155,191,0.18), 0 4px 16px rgba(62,155,191,0.1);
   transition: background 0.3s, border-color 0.3s;
+  overflow: hidden;
 }
-
-/* clip overflow only where needed */
-.card-inner { border-radius: 18px; overflow: hidden; }
 
 .card-stripe {
   height: 10px;
@@ -165,7 +132,7 @@ header p {
 }
 .card-brand-sub {
   font-size: 8px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
@@ -177,8 +144,9 @@ header p {
   border-radius: 50%;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Gasoek One', sans-serif;
-  font-size: 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
   color: white;
   text-shadow: 0 1px 3px rgba(0,0,0,0.2);
   box-shadow: 0 3px 10px rgba(128,206,215,0.4);
@@ -192,29 +160,21 @@ header p {
   padding: 10px 20px 14px;
 }
 
-/* Photo slot — clickable to upload */
+/* Photo slot — display only, no input inside */
 .card-photo-slot {
   flex-shrink: 0;
   width: 100px; height: 120px;
   border-radius: 14px;
-  border: 2.5px dashed rgba(128,206,215,0.5);
+  border: 2px solid rgba(128,206,215,0.3);
   overflow: hidden;
   background: var(--soft-bg);
   display: flex; align-items: center; justify-content: center;
   flex-direction: column;
-  cursor: pointer;
-  position: relative;
-  transition: border-color 0.3s, background 0.2s;
-}
-.card-photo-slot:hover { border-color: var(--sky); background: rgba(128,206,215,0.08); }
-.card-photo-slot input[type="file"] {
-  position: absolute; inset: 0;
-  opacity: 0; cursor: pointer;
-  width: 100%; height: 100%;
+  transition: border-color 0.3s;
 }
 .card-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: none; }
-.photo-placeholder-icon { font-size: 28px; opacity: 0.4; line-height: 1; }
-.photo-placeholder-txt  { font-size: 9px; font-weight: 800; color: var(--muted); letter-spacing: 0.08em; margin-top: 4px; text-align: center; }
+.photo-placeholder-icon { font-size: 28px; opacity: 0.3; line-height: 1; }
+.photo-placeholder-txt  { font-size: 8px; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; margin-top: 4px; text-align: center; opacity: 0.7; }
 
 .card-info {
   flex: 1;
@@ -225,43 +185,36 @@ header p {
   min-width: 0;
 }
 
-/* ── Editable field on card ── */
-.card-field { display: flex; flex-direction: column; gap: 2px; position: relative; }
+.card-field { display: flex; flex-direction: column; gap: 2px; }
 
 .card-lbl {
   font-size: 6.5px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--muted);
   transition: color 0.3s;
-  pointer-events: none;
 }
 
-/* The editable value — looks like plain card text, turns into input on focus */
 .card-editable {
+  font-family: 'DM Sans', sans-serif;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   color: var(--txt-deep);
   line-height: 1.2;
-  transition: color 0.3s;
   background: transparent;
   border: none;
   border-bottom: 1.5px dashed transparent;
   outline: none;
   width: 100%;
-  font-family: 'DM Sans', sans-serif;
-  letter-spacing: 0.01em;
   padding: 1px 0;
   cursor: text;
   min-width: 0;
-  transition: border-color 0.2s, color 0.3s;
+  transition: border-bottom-color 0.2s, color 0.3s;
 }
-.card-editable:focus,
-.card-editable:hover {
-  border-bottom-color: rgba(128,206,215,0.6);
-}
-.card-editable::placeholder { color: rgba(144,180,200,0.55); font-weight: 600; }
+.card-editable:focus { border-bottom-color: rgba(128,206,215,0.6); }
+.card-editable::placeholder { color: rgba(144,180,200,0.5); font-weight: 600; }
 
 .card-name-val {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -271,7 +224,6 @@ header p {
   color: var(--txt-blue);
 }
 
-/* Custom styled select on the card */
 .card-select-wrap { position: relative; }
 .card-select-wrap::after {
   content: '▾';
@@ -296,29 +248,18 @@ header p {
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
-  transition: border-color 0.2s, color 0.3s;
+  transition: border-bottom-color 0.2s, color 0.3s;
 }
-.card-select:focus,
-.card-select:hover { border-bottom-color: rgba(128,206,215,0.6); }
+.card-select:focus { border-bottom-color: rgba(128,206,215,0.6); }
 
-/* Bias pill — wraps the select */
 .bias-pill-wrap {
   display: inline-flex;
   align-items: center;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
   border-radius: 99px;
-  padding: 3px 12px 3px 10px;
+  padding: 3px 10px 3px 10px;
   max-width: 100%;
-  position: relative;
   transition: background 0.3s;
-}
-.bias-pill-wrap::after {
-  content: '▾';
-  color: rgba(255,255,255,0.8);
-  font-size: 10px;
-  pointer-events: none;
-  margin-left: 2px;
-  flex-shrink: 0;
 }
 .bias-pill-select {
   font-family: 'DM Sans', sans-serif;
@@ -331,15 +272,12 @@ header p {
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
-  padding-right: 4px;
   min-width: 0;
-  max-width: 160px;
+  max-width: 170px;
   text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
-/* White options on some browsers */
 .bias-pill-select option { background: #1e4d6b; color: white; }
 
-/* Fact / footer section */
 .card-fact-section {
   margin: 0 20px;
   padding: 8px 14px;
@@ -350,7 +288,7 @@ header p {
 }
 .card-fact-lbl {
   font-size: 6.5px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--muted);
@@ -367,21 +305,34 @@ header p {
 }
 .card-sig-lbl {
   font-size: 6.5px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 3px;
   transition: color 0.3s;
 }
-.card-sig-line {
+/* On the card: show a static image of the drawn signature */
+.card-sig-preview {
   border-bottom: 1.5px solid rgba(128,206,215,0.4);
-  height: 38px;
-  display: flex; align-items: flex-end;
-  transition: border-color 0.3s;
+  height: 40px;
+  display: flex;
+  align-items: flex-end;
   flex: 1;
+  transition: border-color 0.3s;
 }
-.card-sig-line img { max-height: 34px; max-width: 150px; }
+.card-sig-preview img {
+  max-height: 36px;
+  max-width: 180px;
+  display: none;
+}
+.card-sig-empty {
+  font-size: 9px;
+  color: rgba(144,180,200,0.45);
+  font-weight: 600;
+  padding-bottom: 4px;
+  letter-spacing: 0.05em;
+}
 .card-id-num {
   font-size: 8px;
   font-weight: 700;
@@ -391,116 +342,143 @@ header p {
   transition: color 0.3s;
 }
 
-/* Signature canvas on card */
-.card-sig-canvas-wrap {
-  touch-action: none;
-  -ms-touch-action: none;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  cursor: crosshair;
-  flex: 1;
-}
-.card-sig-canvas-wrap canvas {
-  display: block;
-  width: 100%;
-  touch-action: none;
-  -ms-touch-action: none;
-  -webkit-touch-callout: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* ── Bottom controls bar ── */
+/* ── Controls bar ── */
 .controls-bar {
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 100%;
   max-width: 480px;
-  animation: floatUp 0.7s 0.2s ease both;
   position: relative;
   z-index: 1;
+  animation: floatUp 0.7s 0.15s ease both;
 }
 
-.controls-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(255,255,255,0.7);
+.ctrl-row {
+  background: rgba(255,255,255,0.75);
   backdrop-filter: blur(12px);
   border: 1.5px solid rgba(128,206,215,0.35);
   border-radius: 16px;
-  padding: 12px 16px;
+  padding: 14px 16px;
 }
 
-.controls-label {
+.ctrl-label {
   font-size: 10px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--txt-blue);
-  white-space: nowrap;
-  flex-shrink: 0;
+  margin-bottom: 10px;
+  display: block;
 }
 
 /* Colour swatches */
-.swatches { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .swatch {
-  width: 28px; height: 28px;
+  width: 36px; height: 36px;
   border-radius: 50%;
   border: 3px solid transparent;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.15s;
 }
-.swatch:active { transform: scale(0.88); }
-.swatch.active { box-shadow: 0 0 0 2px white, 0 0 0 4px var(--txt-deep); }
+.swatch.active { box-shadow: 0 0 0 2px white, 0 0 0 5px var(--txt-deep); }
 
-/* Sig action buttons */
+/* Photo upload — label wrapping input, the iOS-safe pattern */
+.photo-upload-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+/* The actual input — visible and accessible, just styled */
+.photo-upload-label input[type="file"] {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt-blue);
+  background: rgba(128,206,215,0.1);
+  border: 1.5px solid rgba(128,206,215,0.4);
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  flex: 1;
+  /* Show the native file picker — most reliable on iOS */
+}
+.photo-preview-thumb {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  border: 2px solid rgba(128,206,215,0.4);
+  object-fit: cover;
+  display: none;
+  flex-shrink: 0;
+}
+
+/* Signature canvas — standalone in controls bar */
+.sig-canvas-wrap {
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid rgba(128,206,215,0.4);
+  background: rgba(255,255,255,0.9);
+  overflow: hidden;
+  /* touch-action none on the wrapper */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: crosshair;
+}
+.sig-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 80px;
+  touch-action: none;
+}
+.sig-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
 .btn-sm {
   font-family: 'DM Sans', sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   background: rgba(238,247,255,0.8);
   border: 1.5px solid rgba(128,206,215,0.45);
   color: var(--muted);
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
-  min-height: 34px;
+  min-height: 38px;
   transition: all 0.2s;
   -webkit-tap-highlight-color: transparent;
-  white-space: nowrap;
 }
-.btn-sm:hover, .btn-sm:active { border-color: var(--sky); color: var(--txt-blue); background: rgba(128,206,215,0.1); }
+.btn-sm:active { border-color: var(--sky); color: var(--txt-blue); background: rgba(128,206,215,0.1); }
 
-/* Download button */
 .btn-download {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 800;
   font-size: 14px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
   color: white;
   border: none;
-  padding: 14px 28px;
+  padding: 15px 28px;
   border-radius: 14px;
   cursor: pointer;
   width: 100%;
-  min-height: 50px;
+  min-height: 52px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.15);
   box-shadow: 0 4px 20px rgba(128,206,215,0.45);
-  transition: transform 0.15s, box-shadow 0.15s;
   -webkit-tap-highlight-color: transparent;
+  transition: box-shadow 0.2s;
 }
-.btn-download:hover  { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(128,206,215,0.55); }
-.btn-download:active { transform: translateY(1px); }
+.btn-download:active { box-shadow: 0 2px 8px rgba(128,206,215,0.3); }
 
 @keyframes floatUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -516,138 +494,132 @@ header p {
   <p>MAKE YOUR OWN CORPORATE CARD</p>
 </header>
 
-<div class="hint">
-  <div class="hint-dot"></div>
-  Tap any field on the card to edit it
-</div>
-
 <div class="card-stage">
 
-  <!-- ── THE CARD ── -->
+  <!-- ── THE CARD (display only — no inputs inside except text/select) ── -->
   <div id="id-card">
-    <div class="card-inner">
 
-      <div class="card-stripe"></div>
+    <div class="card-stripe"></div>
 
-      <div class="card-header">
-        <div>
-          <div class="card-brand-top" id="card-brand-top">MOA CORP.</div>
-          <div class="card-brand-sub" id="card-brand-sub">TXT Career Fest · Employee ID</div>
-        </div>
-        <div class="card-badge" id="card-badge">TXT</div>
+    <div class="card-header">
+      <div>
+        <div class="card-brand-top" id="card-brand-top">MOA CORP.</div>
+        <div class="card-brand-sub" id="card-brand-sub">TXT Career Fest · Employee ID</div>
+      </div>
+      <div class="card-badge" id="card-badge">TXT</div>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Photo — static display, updated by JS from the upload below -->
+      <div class="card-photo-slot" id="card-photo-slot">
+        <img id="card-photo" alt="photo" />
+        <div class="photo-placeholder-icon" id="photo-icon">📷</div>
+        <div class="photo-placeholder-txt" id="photo-txt">PHOTO<br>HERE</div>
       </div>
 
-      <div class="card-body">
+      <div class="card-info">
 
-        <!-- Photo — tap to upload -->
-        <div class="card-photo-slot" id="card-photo-slot">
-          <input type="file" id="photo-input" accept="image/*" />
-          <img id="card-photo" alt="photo" />
-          <div class="photo-placeholder-icon" id="photo-icon">📷</div>
-          <div class="photo-placeholder-txt"  id="photo-txt">TAP TO ADD<br>PHOTO</div>
+        <div class="card-field">
+          <div class="card-lbl">Employee Name</div>
+          <input class="card-editable card-name-val" id="card-name"
+            type="text" placeholder="Your Name" maxlength="24" spellcheck="false" autocomplete="off" />
         </div>
 
-        <div class="card-info">
-
-          <!-- Name -->
-          <div class="card-field">
-            <div class="card-lbl">Employee Name</div>
-            <input
-              class="card-editable card-name-val"
-              id="card-name"
-              type="text"
-              placeholder="Your Name"
-              maxlength="24"
-              spellcheck="false"
-            />
+        <div class="card-field">
+          <div class="card-lbl">TXT Bias</div>
+          <div class="bias-pill-wrap" id="bias-pill-wrap">
+            <select class="bias-pill-select" id="card-bias">
+              <option value="">— Select —</option>
+              <option>Yeonjun (연준)</option>
+              <option>Soobin (수빈)</option>
+              <option>Beomgyu (범규)</option>
+              <option>Taehyun (태현)</option>
+              <option>Huening Kai (휴닝카이)</option>
+              <option>ALL OF THEM 😭</option>
+            </select>
           </div>
-
-          <!-- Bias -->
-          <div class="card-field">
-            <div class="card-lbl">TXT Bias</div>
-            <div class="bias-pill-wrap" id="bias-pill-wrap">
-              <select class="bias-pill-select" id="card-bias">
-                <option value="">— Select —</option>
-                <option value="Yeonjun (연준)">Yeonjun (연준)</option>
-                <option value="Soobin (수빈)">Soobin (수빈)</option>
-                <option value="Beomgyu (범규)">Beomgyu (범규)</option>
-                <option value="Taehyun (태현)">Taehyun (태현)</option>
-                <option value="Huening Kai (휴닝카이)">Huening Kai (휴닝카이)</option>
-                <option value="ALL OF THEM 😭">ALL OF THEM 😭</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Company -->
-          <div class="card-field">
-            <div class="card-lbl">Company</div>
-            <div class="card-select-wrap">
-              <select class="card-select" id="card-company">
-                <option value="">— Select Company —</option>
-                <option value="YJ Labels">YJ Labels</option>
-                <option value="Scoob Airlines">Scoob Airlines</option>
-                <option value="313FM">313FM</option>
-                <option value="KT Engineering">KT Engineering</option>
-                <option value="International Huening Group (IHG)">International Huening Group (IHG)</option>
-              </select>
-            </div>
-          </div>
-
         </div>
-      </div><!-- /card-body -->
 
-      <!-- Membership footer strip -->
-      <div class="card-fact-section" id="card-fact-section">
-        <div class="card-fact-lbl">✦ MOA CORPORATE MEMBERSHIP</div>
-        <span id="card-fact" style="font-size:10px;font-weight:700;">TXT Career Fest · Moments of Alwaysness</span>
+        <div class="card-field">
+          <div class="card-lbl">Company</div>
+          <div class="card-select-wrap">
+            <select class="card-select" id="card-company">
+              <option value="">— Select Company —</option>
+              <option>YJ Labels</option>
+              <option>Scoob Airlines</option>
+              <option>313FM</option>
+              <option>KT Engineering</option>
+              <option>International Huening Group (IHG)</option>
+            </select>
+          </div>
+        </div>
+
       </div>
+    </div>
 
-      <!-- Signature + ID -->
-      <div class="card-footer">
-        <div style="flex:1;min-width:0;">
-          <div class="card-sig-lbl">Signature</div>
-          <div class="card-sig-line" id="card-sig-line">
-            <div class="card-sig-canvas-wrap" id="sig-wrap">
-              <canvas id="sig-canvas"></canvas>
-            </div>
-          </div>
-        </div>
-        <div style="text-align:right;padding-left:10px;">
-          <div class="card-id-num" id="card-idnum">MOA-00000000</div>
+    <div class="card-fact-section" id="card-fact-section">
+      <div class="card-fact-lbl">✦ MOA CORPORATE MEMBERSHIP</div>
+      <span id="card-fact" style="font-size:10px;font-weight:700;">TXT Career Fest · Moments of Alwaysness</span>
+    </div>
+
+    <div class="card-footer">
+      <div style="flex:1;min-width:0;">
+        <div class="card-sig-lbl">Signature</div>
+        <div class="card-sig-preview" id="card-sig-preview">
+          <img id="card-sig-img" alt="signature" />
+          <span class="card-sig-empty" id="card-sig-empty">sign below ↓</span>
         </div>
       </div>
+      <div style="text-align:right;padding-left:10px;">
+        <div class="card-id-num" id="card-idnum">MOA-00000000</div>
+      </div>
+    </div>
 
-    </div><!-- /card-inner -->
   </div><!-- /id-card -->
 
   <!-- ── CONTROLS BAR ── -->
   <div class="controls-bar">
 
-    <!-- Colour picker -->
-    <div class="controls-row">
-      <span class="controls-label">Card Colour</span>
-      <div class="swatches" id="swatches">
-        <div class="swatch active" data-color="#B8E8ED" style="background:#B8E8ED" onclick="pickSwatch(this)" title="Pastel Sky"></div>
-        <div class="swatch"        data-color="#F4C5C0" style="background:#F4C5C0" onclick="pickSwatch(this)" title="Pastel Rose"></div>
-        <div class="swatch"        data-color="#C3C4FC" style="background:#C3C4FC" onclick="pickSwatch(this)" title="Pastel Lavender"></div>
-        <div class="swatch"        data-color="#FAD4A0" style="background:#FAD4A0" onclick="pickSwatch(this)" title="Pastel Peach"></div>
-        <div class="swatch"        data-color="#FDED54" style="background:#FDED54" onclick="pickSwatch(this)" title="Pastel Yellow"></div>
+    <!-- Card colour -->
+    <div class="ctrl-row">
+      <span class="ctrl-label">Card Colour</span>
+      <div class="swatches">
+        <div class="swatch active" data-color="#B8E8ED" style="background:#B8E8ED" onclick="pickSwatch(this)"></div>
+        <div class="swatch"        data-color="#F4C5C0" style="background:#F4C5C0" onclick="pickSwatch(this)"></div>
+        <div class="swatch"        data-color="#C3C4FC" style="background:#C3C4FC" onclick="pickSwatch(this)"></div>
+        <div class="swatch"        data-color="#FAD4A0" style="background:#FAD4A0" onclick="pickSwatch(this)"></div>
+        <div class="swatch"        data-color="#FDED54" style="background:#FDED54" onclick="pickSwatch(this)"></div>
       </div>
     </div>
 
-    <!-- Signature controls -->
-    <div class="controls-row">
-      <span class="controls-label">Signature</span>
-      <button class="btn-sm" id="sig-clear" type="button">Clear</button>
-      <button class="btn-sm" id="sig-undo"  type="button">Undo</button>
+    <!-- Photo upload — plain <label> wrapping <input type="file">, most iOS-safe -->
+    <div class="ctrl-row">
+      <span class="ctrl-label">Photo</span>
+      <label class="photo-upload-label">
+        <input type="file" id="photo-input" accept="image/*" />
+        <img class="photo-preview-thumb" id="photo-thumb" alt="preview" />
+      </label>
+    </div>
+
+    <!-- Signature canvas — lives here, outside the card -->
+    <div class="ctrl-row">
+      <span class="ctrl-label">Signature — draw below</span>
+      <div class="sig-canvas-wrap" id="sig-wrap">
+        <canvas id="sig-canvas"></canvas>
+      </div>
+      <div class="sig-actions">
+        <button class="btn-sm" onclick="clearSig()" type="button">Clear</button>
+        <button class="btn-sm" onclick="undoSig()" type="button">Undo</button>
+      </div>
     </div>
 
     <!-- Download -->
-    <button class="btn-download" id="btn-download" type="button">↓ Download My Corporate Card</button>
+    <button class="btn-download" onclick="downloadCard()" type="button">↓ Download My Corporate Card</button>
 
   </div>
 
-</div><!-- /card-stage -->
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
@@ -658,9 +630,9 @@ const THEMES = {
     brandColor:'#2a8fa8', nameColor:'#2a8fa8',
     badgeBg:'linear-gradient(135deg,#80CED7,#2a8fa8)',
     pillBg:'linear-gradient(135deg,#80CED7,#2a8fa8)', pillColor:'#ffffff',
-    factBg:'rgba(128,206,215,0.1)', factBorder:'rgba(100,200,215,0.3)',
+    factBg:'rgba(128,206,215,0.12)', factBorder:'rgba(100,200,215,0.3)',
     bodyText:'#1a4a5a', lblColor:'rgba(80,160,180,0.7)',
-    sigLine:'rgba(100,200,215,0.45)', photoSlotBorder:'rgba(100,200,215,0.5)',
+    sigLine:'rgba(100,200,215,0.45)', photoSlotBorder:'rgba(100,200,215,0.4)',
     idNum:'rgba(80,160,180,0.55)', selectColor:'#1a4a5a',
     dlBg:'linear-gradient(135deg,#80CED7,#2a8fa8)',
   },
@@ -671,7 +643,7 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#F4C5C0,#d97068)', pillColor:'#ffffff',
     factBg:'rgba(244,197,192,0.2)', factBorder:'rgba(220,130,120,0.25)',
     bodyText:'#5a2020', lblColor:'rgba(180,90,85,0.65)',
-    sigLine:'rgba(220,130,120,0.4)', photoSlotBorder:'rgba(220,130,120,0.45)',
+    sigLine:'rgba(220,130,120,0.4)', photoSlotBorder:'rgba(220,130,120,0.35)',
     idNum:'rgba(180,90,85,0.5)', selectColor:'#5a2020',
     dlBg:'linear-gradient(135deg,#F4C5C0,#d97068)',
   },
@@ -682,7 +654,7 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)', pillColor:'#ffffff',
     factBg:'rgba(195,196,252,0.18)', factBorder:'rgba(140,142,240,0.28)',
     bodyText:'#22226a', lblColor:'rgba(100,102,200,0.65)',
-    sigLine:'rgba(140,142,240,0.4)', photoSlotBorder:'rgba(140,142,240,0.45)',
+    sigLine:'rgba(140,142,240,0.4)', photoSlotBorder:'rgba(140,142,240,0.35)',
     idNum:'rgba(100,102,200,0.5)', selectColor:'#22226a',
     dlBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)',
   },
@@ -693,7 +665,7 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#FAD4A0,#e8a840)', pillColor:'#ffffff',
     factBg:'rgba(250,212,160,0.2)', factBorder:'rgba(220,170,80,0.25)',
     bodyText:'#5a3800', lblColor:'rgba(170,110,30,0.65)',
-    sigLine:'rgba(220,170,80,0.4)', photoSlotBorder:'rgba(220,170,80,0.45)',
+    sigLine:'rgba(220,170,80,0.4)', photoSlotBorder:'rgba(220,170,80,0.35)',
     idNum:'rgba(170,110,30,0.5)', selectColor:'#5a3800',
     dlBg:'linear-gradient(135deg,#FAD4A0,#e8a840)',
   },
@@ -704,7 +676,7 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#e5c800,#b8a000)', pillColor:'#3a3000',
     factBg:'rgba(253,237,84,0.15)', factBorder:'rgba(180,160,0,0.25)',
     bodyText:'#3a3000', lblColor:'rgba(140,120,0,0.65)',
-    sigLine:'rgba(180,160,0,0.4)', photoSlotBorder:'rgba(180,160,0,0.45)',
+    sigLine:'rgba(180,160,0,0.4)', photoSlotBorder:'rgba(180,160,0,0.35)',
     idNum:'rgba(140,120,0,0.5)', selectColor:'#3a3000',
     dlBg:'linear-gradient(135deg,#FDED54,#c4a800)',
   },
@@ -715,8 +687,9 @@ let activeColor = '#B8E8ED';
 function applyTheme(hex) {
   activeColor = hex;
   const t = THEMES[hex];
-  document.getElementById('id-card').style.background    = t.cardBg;
-  document.getElementById('id-card').style.borderColor   = t.cardBorder;
+  const card = document.getElementById('id-card');
+  card.style.background  = t.cardBg;
+  card.style.borderColor = t.cardBorder;
   document.getElementById('card-brand-top').style.color  = t.brandColor;
   document.getElementById('card-brand-sub').style.color  = t.lblColor;
   document.getElementById('card-badge').style.background = t.badgeBg;
@@ -727,44 +700,46 @@ function applyTheme(hex) {
   document.getElementById('card-fact-section').style.background  = t.factBg;
   document.getElementById('card-fact-section').style.borderColor = t.factBorder;
   document.getElementById('card-fact').style.color       = t.bodyText;
-  document.getElementById('card-sig-line').style.borderColor     = t.sigLine;
-  document.getElementById('card-photo-slot').style.borderColor   = t.photoSlotBorder;
+  document.getElementById('card-sig-preview').style.borderBottomColor = t.sigLine;
+  document.getElementById('card-photo-slot').style.borderColor = t.photoSlotBorder;
   document.getElementById('card-idnum').style.color      = t.idNum;
-  document.getElementById('btn-download').style.background = t.dlBg;
-  document.querySelectorAll('.card-editable, .card-select').forEach(el => el.style.color = t.bodyText);
+  document.getElementById('btn-download') && (document.getElementById('btn-download').style.background = t.dlBg);
+  document.querySelectorAll('.card-editable,.card-select').forEach(el => el.style.color = t.bodyText);
   document.getElementById('card-name').style.color = t.nameColor;
-  document.querySelectorAll('.card-lbl, .card-sig-lbl, .card-fact-lbl').forEach(el => el.style.color = t.lblColor);
+  document.querySelectorAll('.card-lbl,.card-sig-lbl,.card-fact-lbl').forEach(el => el.style.color = t.lblColor);
+  document.getElementById('card-sig-empty').style.color = t.sigLine;
   styleCtx();
 }
 
-/* ── SWATCHES — use plain onclick set via HTML attribute (most iOS-safe approach) ── */
+/* Swatch — inline onclick, most reliable on iOS */
 function pickSwatch(el) {
-  document.querySelectorAll('.swatch').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   applyTheme(el.dataset.color);
 }
 
-applyTheme('#B8E8ED');
-document.getElementById('card-idnum').textContent =
-  'MOA-' + Math.floor(Math.random() * 99999999).toString().padStart(8, '0');
-
 /* ── PHOTO ── */
-document.getElementById('photo-input').addEventListener('change', e => {
-  const file = e.target.files[0];
+document.getElementById('photo-input').addEventListener('change', function() {
+  const file = this.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = ev => {
-    const img = document.getElementById('card-photo');
-    img.src = ev.target.result;
-    img.style.display = 'block';
+  reader.onload = function(ev) {
+    const url = ev.target.result;
+    // Show on card
+    const cardImg = document.getElementById('card-photo');
+    cardImg.src = url;
+    cardImg.style.display = 'block';
     document.getElementById('photo-icon').style.display = 'none';
     document.getElementById('photo-txt').style.display  = 'none';
-    document.getElementById('card-photo-slot').style.borderStyle = 'solid';
+    // Show thumb in controls
+    const thumb = document.getElementById('photo-thumb');
+    thumb.src = url;
+    thumb.style.display = 'block';
   };
   reader.readAsDataURL(file);
 });
 
-/* ── SIGNATURE — pointer events (works on iOS Safari 13+, all modern browsers) ── */
+/* ── SIGNATURE ── */
 const sigWrap = document.getElementById('sig-wrap');
 const canvas  = document.getElementById('sig-canvas');
 const ctx     = canvas.getContext('2d');
@@ -772,12 +747,11 @@ let drawing = false, lastX = 0, lastY = 0;
 let strokes = [], currentStroke = [];
 
 function initCanvas() {
-  const w = sigWrap.clientWidth || 260;
-  const saved = canvas.width > 1 ? ctx.getImageData(0, 0, canvas.width, canvas.height) : null;
+  const w = sigWrap.clientWidth || 300;
   canvas.width  = w;
-  canvas.height = 44;
+  canvas.height = 80;
   styleCtx();
-  if (saved) { try { ctx.putImageData(saved, 0, 0); } catch(err) {} }
+  redrawAll();
 }
 
 function styleCtx() {
@@ -794,15 +768,16 @@ function getXY(e) {
   return [(e.clientX - r.left) * sx, (e.clientY - r.top) * sy];
 }
 
-canvas.addEventListener('pointerdown', e => {
+/* Use pointer events — single unified API for mouse + touch + stylus */
+canvas.addEventListener('pointerdown', function(e) {
   e.preventDefault();
-  canvas.setPointerCapture(e.pointerId);
+  this.setPointerCapture(e.pointerId);
   drawing = true;
   [lastX, lastY] = getXY(e);
   currentStroke = [[lastX, lastY]];
-});
+}, { passive: false });
 
-canvas.addEventListener('pointermove', e => {
+canvas.addEventListener('pointermove', function(e) {
   e.preventDefault();
   if (!drawing) return;
   const [x, y] = getXY(e);
@@ -813,16 +788,19 @@ canvas.addEventListener('pointermove', e => {
   ctx.stroke();
   [lastX, lastY] = [x, y];
   currentStroke.push([x, y]);
-});
+}, { passive: false });
 
-canvas.addEventListener('pointerup', e => {
+canvas.addEventListener('pointerup', function(e) {
   if (!drawing) return;
   drawing = false;
-  if (currentStroke.length > 1) strokes.push(currentStroke);
+  if (currentStroke.length > 1) {
+    strokes.push([...currentStroke]);
+    pushSigToCard();
+  }
   currentStroke = [];
 });
 
-canvas.addEventListener('pointercancel', e => {
+canvas.addEventListener('pointercancel', function() {
   drawing = false;
   currentStroke = [];
 });
@@ -838,35 +816,54 @@ function redrawAll() {
   });
 }
 
-document.getElementById('sig-clear').addEventListener('click', () => {
+/* Copy canvas image up to the card preview */
+function pushSigToCard() {
+  const img = document.getElementById('card-sig-img');
+  const empty = document.getElementById('card-sig-empty');
+  if (strokes.length > 0) {
+    img.src = canvas.toDataURL();
+    img.style.display = 'block';
+    empty.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    empty.style.display = 'block';
+  }
+}
+
+function clearSig() {
   strokes = [];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
-document.getElementById('sig-undo').addEventListener('click', () => {
+  pushSigToCard();
+}
+
+function undoSig() {
   strokes.pop();
   redrawAll();
-});
+  pushSigToCard();
+}
 
-window.addEventListener('load',   () => setTimeout(initCanvas, 100));
-window.addEventListener('resize', () => setTimeout(initCanvas, 100));
+window.addEventListener('load', function() { setTimeout(initCanvas, 100); });
+window.addEventListener('resize', function() { setTimeout(initCanvas, 100); });
+
+/* ── INIT ── */
+applyTheme('#B8E8ED');
+document.getElementById('card-idnum').textContent =
+  'MOA-' + Math.floor(Math.random() * 99999999).toString().padStart(8, '0');
 
 /* ── DOWNLOAD ── */
-document.getElementById('btn-download').addEventListener('click', () => {
-  const slot = document.getElementById('card-photo-slot');
-  const orig = slot.style.borderStyle;
-  slot.style.borderStyle = 'solid';
+function downloadCard() {
   html2canvas(document.getElementById('id-card'), {
     scale: 3,
     useCORS: true,
     backgroundColor: THEMES[activeColor].cardBg,
-  }).then(c => {
-    slot.style.borderStyle = orig;
+    allowTaint: true,
+  }).then(function(c) {
     const a = document.createElement('a');
     a.download = 'moa-corporate-card.png';
     a.href = c.toDataURL('image/png');
     a.click();
-  }).catch(() => { slot.style.borderStyle = orig; });
-});
+  });
+}
 </script>
 </body>
 </html>
