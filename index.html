@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MOA CORPORATE CARD</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -30,517 +30,272 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
 body::before {
   content: '✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧';
-  position: fixed;
-  inset: 0;
-  font-size: 11px;
-  color: rgba(128,206,215,0.15);
-  letter-spacing: 2.8em;
-  line-height: 3.5em;
-  word-break: break-all;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
+  position: fixed; inset: 0;
+  font-size: 11px; color: rgba(128,206,215,0.15);
+  letter-spacing: 2.8em; line-height: 3.5em;
+  word-break: break-all; pointer-events: none; z-index: 0; overflow: hidden;
 }
 
-/* ── Header ── */
 header {
-  text-align: center;
-  margin-bottom: 36px;
-  position: relative;
-  z-index: 1;
+  text-align: center; margin-bottom: 36px;
+  position: relative; z-index: 1;
   animation: floatUp 0.7s ease both;
 }
 .header-pill {
   display: inline-block;
   background: rgba(128,206,215,0.2);
   border: 1.5px solid rgba(128,206,215,0.6);
-  padding: 4px 16px;
-  border-radius: 99px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--txt-blue);
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  padding: 4px 16px; border-radius: 99px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  color: var(--txt-blue); text-transform: uppercase; margin-bottom: 10px;
 }
 header h1 {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: clamp(34px, 7vw, 72px);
-  line-height: 1;
-  color: var(--txt-blue);
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(34px, 7vw, 72px); line-height: 1; color: var(--txt-blue);
   text-shadow: 4px 4px 0 rgba(128,206,215,0.4), 8px 8px 0 rgba(128,206,215,0.15);
 }
 header h1 .alt  { color: #80CED7; }
 header h1 .alt2 { color: #FDED54; -webkit-text-stroke: 1.5px #c4a800; }
-header p {
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 8px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-}
+header p { font-size: 13px; color: var(--muted); margin-top: 8px; font-weight: 600; }
 
-/* ── Card stage ── */
 .card-stage {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 480px;
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 20px; width: 100%; max-width: 480px;
   animation: floatUp 0.7s 0.1s ease both;
 }
 
-/* ── THE CARD ── */
+/* ══ THE CARD ══ */
 #id-card {
-  width: 100%;
-  border-radius: 20px;
-  background: #ffffff;
+  width: 100%; border-radius: 20px; background: #fff;
   font-family: 'DM Sans', sans-serif;
   border: 2px solid rgba(128,206,215,0.3);
   box-shadow: 0 20px 60px rgba(62,155,191,0.18), 0 4px 16px rgba(62,155,191,0.1);
   transition: background 0.3s, border-color 0.3s;
   overflow: hidden;
 }
-
 .card-stripe {
   height: 10px;
   background: linear-gradient(90deg, #80CED7, #FDED54, #3536F8, #AF0707, #4D120C);
 }
-
 .card-header {
   padding: 16px 20px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
 }
 .card-brand-top {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--txt-blue);
-  line-height: 1;
-  transition: color 0.3s;
+  font-size: 18px; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--txt-blue); line-height: 1; transition: color 0.3s;
 }
 .card-brand-sub {
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 2px;
-  transition: color 0.3s;
+  font-size: 8px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted); margin-top: 2px; transition: color 0.3s;
 }
 .card-badge {
-  width: 44px; height: 44px;
-  border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
   display: flex; align-items: center; justify-content: center;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 900;
-  color: white;
+  font-size: 14px; font-weight: 900; color: white;
   text-shadow: 0 1px 3px rgba(0,0,0,0.2);
   box-shadow: 0 3px 10px rgba(128,206,215,0.4);
-  flex-shrink: 0;
-  transition: background 0.3s;
+  flex-shrink: 0; transition: background 0.3s;
 }
+.card-body { display: flex; gap: 16px; padding: 10px 20px 14px; }
 
-.card-body {
-  display: flex;
-  gap: 16px;
-  padding: 10px 20px 14px;
-}
-
-/* Photo slot — tapping opens file picker via label */
+/* Photo slot */
 .card-photo-slot {
-  flex-shrink: 0;
-  width: 100px; height: 120px;
-  border-radius: 14px;
-  border: 2px dashed rgba(128,206,215,0.5);
-  overflow: hidden;
-  background: var(--soft-bg);
+  flex-shrink: 0; width: 100px; height: 120px;
+  border-radius: 14px; border: 2px dashed rgba(128,206,215,0.5);
+  overflow: hidden; background: var(--soft-bg);
   display: flex; align-items: center; justify-content: center;
-  flex-direction: column;
-  transition: border-color 0.3s, background 0.2s;
-  position: relative;
-  cursor: pointer;
+  flex-direction: column; position: relative;
+  transition: border-color 0.3s;
 }
-/* The label covers the whole slot — triggers file input on tap */
+.card-photo-slot img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: none; z-index: 2; border-radius: 12px;
+}
 .card-photo-slot label {
-  position: absolute;
-  inset: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 4px;
-  z-index: 2;
+  position: absolute; inset: 0; z-index: 3; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;
 }
 .card-photo-slot input[type="file"] {
-  position: absolute;
-  width: 1px; height: 1px;
-  opacity: 0;
-  left: 0; top: 0;
-}
-/* Image: fills slot as normal block, not absolute */
-.card-photo-slot img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: none;
-  z-index: 1;
-  border-radius: 12px;
+  position: absolute; width: 1px; height: 1px; opacity: 0; left: 0; top: 0;
 }
 .photo-ph-icon { font-size: 26px; opacity: 0.35; }
-.photo-ph-txt  {
-  font-size: 8px; font-weight: 700;
-  color: var(--muted); letter-spacing: 0.06em;
-  text-align: center; opacity: 0.8;
-}
+.photo-ph-txt { font-size: 8px; font-weight: 700; color: var(--muted); text-align: center; opacity: 0.8; }
 
+/* Card info fields */
 .card-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  min-width: 0;
+  flex: 1; display: flex; flex-direction: column;
+  gap: 10px; justify-content: center; min-width: 0;
 }
 .card-field { display: flex; flex-direction: column; gap: 2px; }
 .card-lbl {
-  font-size: 6.5px;
-  font-weight: 800;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: color 0.3s;
+  font-size: 6.5px; font-weight: 800; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--muted); transition: color 0.3s;
 }
-.card-editable {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: var(--txt-deep);
-  background: transparent;
-  border: none;
-  border-bottom: 1.5px dashed transparent;
-  outline: none;
-  width: 100%;
-  padding: 1px 0;
-  min-width: 0;
+
+/* Name input — editable directly on card */
+.card-name-input {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px; font-weight: 800; letter-spacing: 0.04em;
+  color: var(--txt-blue); background: transparent;
+  border: none; border-bottom: 1.5px dashed transparent;
+  outline: none; width: 100%; padding: 1px 0; min-width: 0;
   transition: border-bottom-color 0.2s, color 0.3s;
 }
-.card-editable:focus { border-bottom-color: rgba(128,206,215,0.6); }
-.card-editable::placeholder { color: rgba(144,180,200,0.5); }
-.card-name-val {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--txt-blue);
-}
-.card-select-wrap { position: relative; }
-.card-select-wrap::after {
-  content: '▾';
-  position: absolute;
-  right: 2px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  pointer-events: none;
-  font-size: 11px;
-}
-.card-select:focus { border-bottom-color: rgba(128,206,215,0.6); }
-.bias-pill-wrap {
-  display: inline-flex;
-  align-items: center;
-  align-self: flex-start;
-  background: linear-gradient(135deg, #80CED7, #3a9bbf);
-  border-radius: 99px;
-  padding: 4px 12px 4px 10px;
-  max-width: 100%;
-  transition: background 0.3s;
-}
-.bias-pill-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  color: white;
-  white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-}
-/* Plain text display for company on card */
-.card-val-display {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--txt-deep);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  transition: color 0.3s;
-}
-/* Selects in the controls bar */
-.ctrl-select-wrap { position: relative; }
-.ctrl-select-wrap::after {
-  content: '▾';
-  position: absolute;
-  right: 14px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  pointer-events: none;
-  font-size: 13px;
-}
-.ctrl-select {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--txt-deep);
-  background: rgba(238,247,255,0.85);
-  border: 1.5px solid rgba(128,206,215,0.45);
-  border-radius: 12px;
-  padding: 10px 36px 10px 14px;
-  width: 100%;
-  outline: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-  min-height: 44px;
-}
-.bias-pill-text option { background: #1e4d6b; color: white; }
+.card-name-input:focus { border-bottom-color: rgba(128,206,215,0.6); }
+.card-name-input::placeholder { color: rgba(144,180,200,0.5); font-weight: 600; }
 
+/* Bias pill — plain div, no select */
+.bias-pill {
+  display: inline-flex; align-items: center;
+  background: linear-gradient(135deg, #80CED7, #3a9bbf);
+  border-radius: 99px; padding: 4px 12px;
+  transition: background 0.3s; align-self: flex-start;
+}
+.bias-pill span {
+  font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
+  color: white; white-space: nowrap; text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+/* Company — plain div, no select */
+.card-company-text {
+  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+  color: var(--txt-deep); transition: color 0.3s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Fact section */
 .card-fact-section {
-  margin: 0 20px;
-  padding: 8px 14px;
-  border-radius: 12px;
-  background: var(--soft-bg);
-  border: 1.5px solid rgba(128,206,215,0.25);
+  margin: 0 20px; padding: 8px 14px; border-radius: 12px;
+  background: var(--soft-bg); border: 1.5px solid rgba(128,206,215,0.25);
   transition: background 0.3s, border-color 0.3s;
 }
 .card-fact-lbl {
-  font-size: 6.5px; font-weight: 800;
-  letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 2px;
-  transition: color 0.3s;
+  font-size: 6.5px; font-weight: 800; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 2px; transition: color 0.3s;
 }
+.card-fact-text { font-size: 10px; font-weight: 700; color: var(--txt-deep); transition: color 0.3s; }
 
+/* Footer */
 .card-footer {
   padding: 12px 20px 16px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 10px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 10px;
 }
 .card-sig-lbl {
-  font-size: 6.5px; font-weight: 800;
-  letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 3px;
-  transition: color 0.3s;
+  font-size: 6.5px; font-weight: 800; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 3px; transition: color 0.3s;
 }
-
-/* Signature area on card — tap to open modal */
 .card-sig-tap {
-  flex: 1;
-  border-bottom: 1.5px solid rgba(128,206,215,0.4);
-  height: 44px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  transition: border-color 0.3s;
+  flex: 1; border-bottom: 1.5px solid rgba(128,206,215,0.4);
+  min-height: 44px; display: flex; align-items: center;
+  cursor: pointer; transition: border-color 0.3s;
   -webkit-tap-highlight-color: transparent;
 }
-.card-sig-tap img {
-  max-height: 40px;
-  max-width: 180px;
-  display: none;
+.card-sig-tap img { max-height: 40px; max-width: 180px; display: none; }
+.sig-tap-prompt {
+  font-size: 10px; font-weight: 600; color: rgba(128,206,215,0.8);
+  display: flex; align-items: center; gap: 5px;
 }
-.card-sig-tap .sig-prompt {
-  font-size: 10px;
-  font-weight: 600;
-  color: rgba(128,206,215,0.7);
-  letter-spacing: 0.05em;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.sig-prompt-icon { font-size: 14px; }
-
 .card-id-num {
-  font-size: 8px; font-weight: 700;
-  letter-spacing: 0.15em;
-  color: rgba(144,180,200,0.6);
-  white-space: nowrap;
-  transition: color 0.3s;
+  font-size: 8px; font-weight: 700; letter-spacing: 0.15em;
+  color: rgba(144,180,200,0.6); white-space: nowrap; transition: color 0.3s;
 }
 
-/* ── Controls bar ── */
+/* ══ CONTROLS BAR ══ */
 .controls-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 100%;
-  max-width: 480px;
-  position: relative;
-  z-index: 1;
+  display: flex; flex-direction: column; gap: 14px;
+  width: 100%; max-width: 480px;
+  position: relative; z-index: 1;
   animation: floatUp 0.7s 0.15s ease both;
 }
 .ctrl-row {
   background: rgba(255,255,255,0.75);
   backdrop-filter: blur(12px);
   border: 1.5px solid rgba(128,206,215,0.35);
-  border-radius: 16px;
-  padding: 14px 16px;
+  border-radius: 16px; padding: 14px 16px;
 }
 .ctrl-label {
-  font-size: 10px; font-weight: 800;
+  display: block; font-size: 10px; font-weight: 800;
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--txt-blue);
-  margin-bottom: 10px;
-  display: block;
+  color: var(--txt-blue); margin-bottom: 10px;
 }
+/* Colour swatches */
 .swatches { display: flex; gap: 10px; flex-wrap: wrap; }
 .swatch {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
-  flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 3px solid transparent; cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18); flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
 }
 .swatch.active { box-shadow: 0 0 0 2px white, 0 0 0 5px var(--txt-deep); }
 
+/* Selects in controls bar */
+.ctrl-select {
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+  color: var(--txt-deep); background: rgba(238,247,255,0.9);
+  border: 1.5px solid rgba(128,206,215,0.45); border-radius: 12px;
+  padding: 11px 14px; width: 100%; outline: none; cursor: pointer;
+  -webkit-appearance: none; appearance: none; min-height: 46px;
+}
+
 .btn-download {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+  font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
-  color: white;
-  border: none;
-  padding: 15px 28px;
-  border-radius: 14px;
-  cursor: pointer;
-  width: 100%;
-  min-height: 52px;
+  color: white; border: none; padding: 15px 28px; border-radius: 14px;
+  cursor: pointer; width: 100%; min-height: 52px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.15);
   box-shadow: 0 4px 20px rgba(128,206,215,0.45);
-  -webkit-tap-highlight-color: transparent;
-  transition: box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent; transition: box-shadow 0.2s;
 }
 .btn-download:active { box-shadow: 0 2px 8px rgba(128,206,215,0.3); }
 
-/* ═══════════════════════════════
-   SIGNATURE MODAL
-═══════════════════════════════ */
+/* ══ SIGNATURE MODAL ══ */
 .sig-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(20, 40, 60, 0.55);
-  backdrop-filter: blur(4px);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(20,40,60,0.6);
+  align-items: center; justify-content: center; padding: 20px;
 }
 .sig-modal.open { display: flex; }
-
 .sig-modal-box {
-  background: white;
-  border-radius: 24px;
-  padding: 24px 20px 20px;
-  width: 100%;
-  max-width: 480px;
+  background: white; border-radius: 24px; padding: 24px 20px 20px;
+  width: 100%; max-width: 480px;
   box-shadow: 0 24px 80px rgba(0,0,0,0.25);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: flex; flex-direction: column; gap: 14px;
 }
 .sig-modal-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--txt-deep);
-  letter-spacing: 0.04em;
+  font-size: 17px; font-weight: 800; color: var(--txt-deep);
 }
-.sig-modal-hint {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-  margin-top: -8px;
+.sig-modal-hint { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: -6px; }
+.sig-canvas-wrap {
+  width: 100%; height: 160px; border-radius: 14px;
+  border: 2px solid rgba(128,206,215,0.45); background: #f8fdff;
+  overflow: hidden; touch-action: none;
+  -webkit-user-select: none; user-select: none; cursor: crosshair;
 }
-
-/* The drawing canvas inside the modal */
-.sig-modal-canvas-wrap {
-  width: 100%;
-  border-radius: 14px;
-  border: 2px solid rgba(128,206,215,0.45);
-  background: #f8fdff;
-  overflow: hidden;
-  /* touch-action none is critical — no competing scroll here */
-  touch-action: none;
-  -webkit-user-select: none;
-  user-select: none;
-  cursor: crosshair;
-  /* give it a generous height so it's easy to draw on */
-  height: 160px;
-}
-.sig-modal-canvas-wrap canvas {
-  display: block;
-  width: 100%;
-  height: 160px;
-  touch-action: none;
-}
-
-.sig-modal-actions {
-  display: flex;
-  gap: 10px;
-}
+.sig-canvas-wrap canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.sig-modal-btns { display: flex; gap: 10px; }
 .btn-ghost {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: rgba(238,247,255,0.9);
-  border: 1.5px solid rgba(128,206,215,0.45);
-  color: var(--muted);
-  padding: 10px 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  min-height: 44px;
-  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  background: rgba(238,247,255,0.9); border: 1.5px solid rgba(128,206,215,0.45);
+  color: var(--muted); padding: 10px 18px; border-radius: 10px;
+  cursor: pointer; min-height: 44px; -webkit-tap-highlight-color: transparent;
 }
 .btn-ghost:active { border-color: var(--sky); color: var(--txt-blue); }
 .btn-confirm {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 800;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 800;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
-  color: white;
-  border: none;
-  padding: 10px 24px;
-  border-radius: 10px;
-  cursor: pointer;
-  flex: 1;
-  min-height: 44px;
+  color: white; border: none; padding: 10px 24px; border-radius: 10px;
+  cursor: pointer; flex: 1; min-height: 44px;
   -webkit-tap-highlight-color: transparent;
   box-shadow: 0 3px 12px rgba(128,206,215,0.4);
 }
@@ -563,7 +318,6 @@ header p {
 
   <!-- ══ THE CARD ══ -->
   <div id="id-card">
-
     <div class="card-stripe"></div>
 
     <div class="card-header">
@@ -575,8 +329,7 @@ header p {
     </div>
 
     <div class="card-body">
-
-      <!-- Photo slot: label wraps a hidden file input — most reliable iOS pattern -->
+      <!-- Photo — label triggers hidden file input, most iOS-safe pattern -->
       <div class="card-photo-slot" id="card-photo-slot">
         <img id="card-photo" alt="photo" />
         <label for="photo-input">
@@ -587,54 +340,51 @@ header p {
       </div>
 
       <div class="card-info">
-
+        <!-- Name: plain input, works everywhere -->
         <div class="card-field">
-          <div class="card-lbl">Employee Name</div>
-          <input class="card-editable card-name-val" id="card-name"
-            type="text" placeholder="Your Name" maxlength="24"
-            spellcheck="false" autocomplete="off" />
+          <div class="card-lbl" id="lbl-name">Employee Name</div>
+          <input class="card-name-input" id="card-name"
+            type="text" placeholder="Your Name"
+            maxlength="24" spellcheck="false" autocomplete="off" />
         </div>
 
+        <!-- Bias: plain div updated by select below -->
         <div class="card-field">
-          <div class="card-lbl">TXT Bias</div>
-          <div class="bias-pill-wrap" id="bias-pill-wrap">
-            <span class="bias-pill-text" id="bias-display">— Select below —</span>
+          <div class="card-lbl" id="lbl-bias">TXT Bias</div>
+          <div class="bias-pill" id="bias-pill">
+            <span id="bias-display">— Select below —</span>
           </div>
         </div>
 
+        <!-- Company: plain div updated by select below -->
         <div class="card-field">
-          <div class="card-lbl">Company</div>
-          <div class="card-val-display" id="company-display">— Select below —</div>
+          <div class="card-lbl" id="lbl-company">Company</div>
+          <div class="card-company-text" id="company-display">— Select below —</div>
         </div>
-
       </div>
     </div>
 
     <div class="card-fact-section" id="card-fact-section">
-      <div class="card-fact-lbl">✦ MOA CORPORATE MEMBERSHIP</div>
-      <span id="card-fact" style="font-size:10px;font-weight:700;">TXT Career Fest · Moments of Alwaysness</span>
+      <div class="card-fact-lbl" id="lbl-fact">✦ MOA CORPORATE MEMBERSHIP</div>
+      <div class="card-fact-text" id="card-fact">TXT Career Fest · Moments of Alwaysness</div>
     </div>
 
     <div class="card-footer">
       <div style="flex:1;min-width:0;">
-        <div class="card-sig-lbl">Signature</div>
-        <!-- Tapping this opens the modal -->
+        <div class="card-sig-lbl" id="lbl-sig">Signature</div>
+        <!-- Tapping opens the fullscreen modal -->
         <div class="card-sig-tap" id="card-sig-tap" onclick="openSigModal()">
-          <img id="card-sig-img" alt="signature" />
-          <div class="sig-prompt" id="sig-prompt">
-            <span class="sig-prompt-icon">✍️</span>
-            <span>Tap to sign</span>
-          </div>
+          <img id="card-sig-img" alt="sig" />
+          <div class="sig-tap-prompt" id="sig-tap-prompt">✍️ Tap to sign</div>
         </div>
       </div>
       <div style="text-align:right;padding-left:10px;">
         <div class="card-id-num" id="card-idnum">MOA-00000000</div>
       </div>
     </div>
-
   </div><!-- /id-card -->
 
-  <!-- ══ CONTROLS ══ -->
+  <!-- ══ CONTROLS BAR ══ -->
   <div class="controls-bar">
 
     <div class="ctrl-row">
@@ -649,32 +399,28 @@ header p {
     </div>
 
     <div class="ctrl-row">
-      <label class="ctrl-label" for="card-bias">TXT Bias</label>
-      <div class="ctrl-select-wrap">
-        <select class="ctrl-select" id="card-bias" onchange="updateBias(this.value)">
-          <option value="">— Select your bias —</option>
-          <option>Yeonjun (연준)</option>
-          <option>Soobin (수빈)</option>
-          <option>Beomgyu (범규)</option>
-          <option>Taehyun (태현)</option>
-          <option>Huening Kai (휴닝카이)</option>
-          <option>ALL OF THEM 😭</option>
-        </select>
-      </div>
+      <label class="ctrl-label" for="select-bias">TXT Bias</label>
+      <select class="ctrl-select" id="select-bias" onchange="updateBias(this.value)">
+        <option value="">— Select your bias —</option>
+        <option>Yeonjun (연준)</option>
+        <option>Soobin (수빈)</option>
+        <option>Beomgyu (범규)</option>
+        <option>Taehyun (태현)</option>
+        <option>Huening Kai (휴닝카이)</option>
+        <option>ALL OF THEM 😭</option>
+      </select>
     </div>
 
     <div class="ctrl-row">
-      <label class="ctrl-label" for="card-company">Favourite Company</label>
-      <div class="ctrl-select-wrap">
-        <select class="ctrl-select" id="card-company" onchange="updateCompany(this.value)">
-          <option value="">— Select your company —</option>
-          <option>YJ Labels</option>
-          <option>Scoob Airlines</option>
-          <option>313FM</option>
-          <option>KT Engineering</option>
-          <option>International Huening Group (IHG)</option>
-        </select>
-      </div>
+      <label class="ctrl-label" for="select-company">Favourite Company</label>
+      <select class="ctrl-select" id="select-company" onchange="updateCompany(this.value)">
+        <option value="">— Select your company —</option>
+        <option>YJ Labels</option>
+        <option>Scoob Airlines</option>
+        <option>313FM</option>
+        <option>KT Engineering</option>
+        <option>International Huening Group (IHG)</option>
+      </select>
     </div>
 
     <button class="btn-download" onclick="downloadCard()" type="button">↓ Download My Corporate Card</button>
@@ -688,12 +434,10 @@ header p {
   <div class="sig-modal-box">
     <div class="sig-modal-title">✍️ Draw Your Signature</div>
     <div class="sig-modal-hint">Use your finger to sign in the box below</div>
-
-    <div class="sig-modal-canvas-wrap" id="modal-canvas-wrap">
+    <div class="sig-canvas-wrap" id="sig-canvas-wrap">
       <canvas id="sig-canvas"></canvas>
     </div>
-
-    <div class="sig-modal-actions">
+    <div class="sig-modal-btns">
       <button class="btn-ghost" onclick="clearSig()" type="button">Clear</button>
       <button class="btn-ghost" onclick="closeSigModal()" type="button">Cancel</button>
       <button class="btn-confirm" onclick="confirmSig()" type="button">✓ Done</button>
@@ -709,49 +453,45 @@ const THEMES = {
     cardBg:'#f0fbfc', cardBorder:'rgba(100,200,215,0.35)',
     brandColor:'#2a8fa8', nameColor:'#2a8fa8',
     badgeBg:'linear-gradient(135deg,#80CED7,#2a8fa8)',
-    pillBg:'linear-gradient(135deg,#80CED7,#2a8fa8)', pillColor:'#ffffff',
+    pillBg:'linear-gradient(135deg,#80CED7,#2a8fa8)', pillColor:'#fff',
     factBg:'rgba(128,206,215,0.12)', factBorder:'rgba(100,200,215,0.3)',
     bodyText:'#1a4a5a', lblColor:'rgba(80,160,180,0.75)',
-    sigLine:'rgba(100,200,215,0.5)', photoSlotBorder:'rgba(100,200,215,0.5)',
-    idNum:'rgba(80,160,180,0.55)', selectColor:'#1a4a5a',
+    sigLine:'rgba(100,200,215,0.5)', photoBorder:'rgba(100,200,215,0.5)',
+    idNum:'rgba(80,160,180,0.55)', sigStroke:'#2a8fa8',
     dlBg:'linear-gradient(135deg,#80CED7,#2a8fa8)',
-    sigStroke:'#2a8fa8',
   },
   '#F4C5C0': {
     cardBg:'#fff5f4', cardBorder:'rgba(220,130,120,0.3)',
     brandColor:'#c05a52', nameColor:'#c05a52',
     badgeBg:'linear-gradient(135deg,#F4C5C0,#d97068)',
-    pillBg:'linear-gradient(135deg,#F4C5C0,#d97068)', pillColor:'#ffffff',
+    pillBg:'linear-gradient(135deg,#F4C5C0,#d97068)', pillColor:'#fff',
     factBg:'rgba(244,197,192,0.2)', factBorder:'rgba(220,130,120,0.25)',
     bodyText:'#5a2020', lblColor:'rgba(180,90,85,0.65)',
-    sigLine:'rgba(220,130,120,0.45)', photoSlotBorder:'rgba(220,130,120,0.5)',
-    idNum:'rgba(180,90,85,0.5)', selectColor:'#5a2020',
+    sigLine:'rgba(220,130,120,0.45)', photoBorder:'rgba(220,130,120,0.5)',
+    idNum:'rgba(180,90,85,0.5)', sigStroke:'#c05a52',
     dlBg:'linear-gradient(135deg,#F4C5C0,#d97068)',
-    sigStroke:'#c05a52',
   },
   '#C3C4FC': {
     cardBg:'#f5f5ff', cardBorder:'rgba(140,142,240,0.35)',
     brandColor:'#5254c0', nameColor:'#5254c0',
     badgeBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)',
-    pillBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)', pillColor:'#ffffff',
+    pillBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)', pillColor:'#fff',
     factBg:'rgba(195,196,252,0.18)', factBorder:'rgba(140,142,240,0.28)',
     bodyText:'#22226a', lblColor:'rgba(100,102,200,0.65)',
-    sigLine:'rgba(140,142,240,0.45)', photoSlotBorder:'rgba(140,142,240,0.5)',
-    idNum:'rgba(100,102,200,0.5)', selectColor:'#22226a',
+    sigLine:'rgba(140,142,240,0.45)', photoBorder:'rgba(140,142,240,0.5)',
+    idNum:'rgba(100,102,200,0.5)', sigStroke:'#5254c0',
     dlBg:'linear-gradient(135deg,#C3C4FC,#7c7ef0)',
-    sigStroke:'#5254c0',
   },
   '#FAD4A0': {
     cardBg:'#fff9f0', cardBorder:'rgba(220,170,80,0.3)',
     brandColor:'#b07820', nameColor:'#b07820',
     badgeBg:'linear-gradient(135deg,#FAD4A0,#e8a840)',
-    pillBg:'linear-gradient(135deg,#FAD4A0,#e8a840)', pillColor:'#ffffff',
+    pillBg:'linear-gradient(135deg,#FAD4A0,#e8a840)', pillColor:'#fff',
     factBg:'rgba(250,212,160,0.2)', factBorder:'rgba(220,170,80,0.25)',
     bodyText:'#5a3800', lblColor:'rgba(170,110,30,0.65)',
-    sigLine:'rgba(220,170,80,0.45)', photoSlotBorder:'rgba(220,170,80,0.5)',
-    idNum:'rgba(170,110,30,0.5)', selectColor:'#5a3800',
+    sigLine:'rgba(220,170,80,0.45)', photoBorder:'rgba(220,170,80,0.5)',
+    idNum:'rgba(170,110,30,0.5)', sigStroke:'#b07820',
     dlBg:'linear-gradient(135deg,#FAD4A0,#e8a840)',
-    sigStroke:'#b07820',
   },
   '#FDED54': {
     cardBg:'#fffde8', cardBorder:'rgba(180,160,0,0.3)',
@@ -760,10 +500,9 @@ const THEMES = {
     pillBg:'linear-gradient(135deg,#e5c800,#b8a000)', pillColor:'#3a3000',
     factBg:'rgba(253,237,84,0.15)', factBorder:'rgba(180,160,0,0.25)',
     bodyText:'#3a3000', lblColor:'rgba(140,120,0,0.65)',
-    sigLine:'rgba(180,160,0,0.45)', photoSlotBorder:'rgba(180,160,0,0.5)',
-    idNum:'rgba(140,120,0,0.5)', selectColor:'#3a3000',
+    sigLine:'rgba(180,160,0,0.45)', photoBorder:'rgba(180,160,0,0.5)',
+    idNum:'rgba(140,120,0,0.5)', sigStroke:'#8a7500',
     dlBg:'linear-gradient(135deg,#FDED54,#c4a800)',
-    sigStroke:'#8a7500',
   },
 };
 
@@ -772,26 +511,32 @@ let activeColor = '#B8E8ED';
 function applyTheme(hex) {
   activeColor = hex;
   const t = THEMES[hex];
-  document.getElementById('id-card').style.background    = t.cardBg;
-  document.getElementById('id-card').style.borderColor   = t.cardBorder;
-  document.getElementById('card-brand-top').style.color  = t.brandColor;
-  document.getElementById('card-brand-sub').style.color  = t.lblColor;
-  document.getElementById('card-badge').style.background = t.badgeBg;
-  document.getElementById('card-name').style.color       = t.nameColor;
-  document.getElementById('bias-pill-wrap').style.background = t.pillBg;
-  document.getElementById('bias-display').style.color        = t.pillColor;
-  document.getElementById('company-display').style.color     = t.bodyText;
-  document.querySelector('.ctrl-select-wrap .ctrl-select') && null; // selects stay default styled
+  document.getElementById('id-card').style.background      = t.cardBg;
+  document.getElementById('id-card').style.borderColor     = t.cardBorder;
+  document.getElementById('card-brand-top').style.color    = t.brandColor;
+  document.getElementById('card-brand-sub').style.color    = t.lblColor;
+  document.getElementById('card-badge').style.background   = t.badgeBg;
+  document.getElementById('card-name').style.color         = t.nameColor;
+  document.getElementById('bias-pill').style.background    = t.pillBg;
+  document.getElementById('bias-display').style.color      = t.pillColor;
+  document.getElementById('company-display').style.color   = t.bodyText;
   document.getElementById('card-fact-section').style.background  = t.factBg;
   document.getElementById('card-fact-section').style.borderColor = t.factBorder;
-  document.getElementById('card-fact').style.color       = t.bodyText;
+  document.getElementById('card-fact').style.color         = t.bodyText;
   document.getElementById('card-sig-tap').style.borderBottomColor = t.sigLine;
-  document.getElementById('card-photo-slot').style.borderColor   = t.photoSlotBorder;
-  document.getElementById('card-idnum').style.color      = t.idNum;
-  document.getElementById('btn-download') && (document.getElementById('btn-download').style.background = t.dlBg);
-  document.querySelectorAll('.card-editable,.card-select').forEach(el => el.style.color = t.bodyText);
-  document.getElementById('card-name').style.color = t.nameColor;
-  document.querySelectorAll('.card-lbl,.card-sig-lbl,.card-fact-lbl').forEach(el => el.style.color = t.lblColor);
+  document.getElementById('card-photo-slot').style.borderColor   = t.photoBorder;
+  document.getElementById('card-idnum').style.color        = t.idNum;
+  document.getElementById('btn-download').style.background = t.dlBg;
+  document.getElementById('card-name').style.color         = t.nameColor;
+  ['lbl-name','lbl-bias','lbl-company','lbl-fact','lbl-sig','card-brand-sub'].forEach(function(id) {
+    document.getElementById(id).style.color = t.lblColor;
+  });
+}
+
+function pickSwatch(el) {
+  document.querySelectorAll('.swatch').forEach(function(s) { s.classList.remove('active'); });
+  el.classList.add('active');
+  applyTheme(el.dataset.color);
 }
 
 function updateBias(val) {
@@ -799,22 +544,17 @@ function updateBias(val) {
 }
 
 function updateCompany(val) {
-  const el = document.getElementById('company-display');
-  el.textContent = val || '— Select below —';
-  el.style.color = THEMES[activeColor].selectColor || THEMES[activeColor].bodyText;
-}
-  document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
-  applyTheme(el.dataset.color);
+  document.getElementById('company-display').textContent = val || '— Select below —';
+  document.getElementById('company-display').style.color = THEMES[activeColor].bodyText;
 }
 
 /* ══ PHOTO ══ */
 document.getElementById('photo-input').addEventListener('change', function() {
-  const file = this.files[0];
+  var file = this.files[0];
   if (!file) return;
-  const reader = new FileReader();
+  var reader = new FileReader();
   reader.onload = function(ev) {
-    const img = document.getElementById('card-photo');
+    var img = document.getElementById('card-photo');
     img.src = ev.target.result;
     img.style.display = 'block';
     document.getElementById('photo-ph-icon').style.display = 'none';
@@ -824,24 +564,22 @@ document.getElementById('photo-input').addEventListener('change', function() {
 });
 
 /* ══ SIGNATURE MODAL ══ */
-const modal      = document.getElementById('sig-modal');
-const canvasWrap = document.getElementById('modal-canvas-wrap');
-const canvas     = document.getElementById('sig-canvas');
-const ctx        = canvas.getContext('2d');
-let drawing = false, lastX = 0, lastY = 0;
-let strokes = [], currentStroke = [];
+var modal      = document.getElementById('sig-modal');
+var canvasWrap = document.getElementById('sig-canvas-wrap');
+var canvas     = document.getElementById('sig-canvas');
+var ctx        = canvas.getContext('2d');
+var drawing = false, lastX = 0, lastY = 0;
+var strokes = [], currentStroke = [];
 
 function openSigModal() {
   modal.classList.add('open');
-  // Prevent body scroll while modal open
   document.body.style.overflow = 'hidden';
-  // Size canvas to its container
   setTimeout(function() {
     canvas.width  = canvasWrap.clientWidth;
     canvas.height = canvasWrap.clientHeight;
     styleCtx();
-    redrawAll();
-  }, 30);
+    redrawStrokes();
+  }, 50);
 }
 
 function closeSigModal() {
@@ -850,12 +588,11 @@ function closeSigModal() {
 }
 
 function confirmSig() {
-  const img    = document.getElementById('card-sig-img');
-  const prompt = document.getElementById('sig-prompt');
   if (strokes.length > 0) {
+    var img = document.getElementById('card-sig-img');
     img.src = canvas.toDataURL();
     img.style.display = 'block';
-    prompt.style.display = 'none';
+    document.getElementById('sig-tap-prompt').style.display = 'none';
   }
   closeSigModal();
 }
@@ -866,67 +603,65 @@ function clearSig() {
 }
 
 function styleCtx() {
-  ctx.strokeStyle = THEMES[activeColor]?.sigStroke || '#2a8fa8';
+  ctx.strokeStyle = THEMES[activeColor].sigStroke || '#2a8fa8';
   ctx.lineWidth   = 3;
   ctx.lineCap     = 'round';
   ctx.lineJoin    = 'round';
 }
 
 function getXY(e) {
-  const r  = canvas.getBoundingClientRect();
-  const sx = canvas.width  / r.width;
-  const sy = canvas.height / r.height;
+  var r  = canvas.getBoundingClientRect();
+  var sx = canvas.width  / r.width;
+  var sy = canvas.height / r.height;
   return [(e.clientX - r.left) * sx, (e.clientY - r.top) * sy];
 }
 
-function redrawAll() {
+function redrawStrokes() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   styleCtx();
   strokes.forEach(function(stroke) {
     if (stroke.length < 2) return;
     ctx.beginPath();
-    stroke.forEach(function([x, y], i) {
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    stroke.forEach(function(pt, i) {
+      if (i === 0) ctx.moveTo(pt[0], pt[1]);
+      else ctx.lineTo(pt[0], pt[1]);
     });
     ctx.stroke();
   });
 }
 
-/* Pointer events on the modal canvas — no competing scroll exists in the modal */
 canvas.addEventListener('pointerdown', function(e) {
   e.preventDefault();
   canvas.setPointerCapture(e.pointerId);
   drawing = true;
-  [lastX, lastY] = getXY(e);
+  var xy = getXY(e); lastX = xy[0]; lastY = xy[1];
   currentStroke = [[lastX, lastY]];
 }, { passive: false });
 
 canvas.addEventListener('pointermove', function(e) {
   e.preventDefault();
   if (!drawing) return;
-  const [x, y] = getXY(e);
+  var xy = getXY(e); var x = xy[0]; var y = xy[1];
   styleCtx();
   ctx.beginPath();
   ctx.moveTo(lastX, lastY);
   ctx.lineTo(x, y);
   ctx.stroke();
-  [lastX, lastY] = [x, y];
+  lastX = x; lastY = y;
   currentStroke.push([x, y]);
 }, { passive: false });
 
 canvas.addEventListener('pointerup', function() {
   if (!drawing) return;
   drawing = false;
-  if (currentStroke.length > 1) strokes.push([...currentStroke]);
+  if (currentStroke.length > 1) strokes.push(currentStroke.slice());
   currentStroke = [];
 });
 
 canvas.addEventListener('pointercancel', function() {
-  drawing = false;
-  currentStroke = [];
+  drawing = false; currentStroke = [];
 });
 
-/* Close modal if tapping the dark backdrop */
 modal.addEventListener('click', function(e) {
   if (e.target === modal) closeSigModal();
 });
@@ -936,27 +671,22 @@ applyTheme('#B8E8ED');
 document.getElementById('card-idnum').textContent =
   'MOA-' + Math.floor(Math.random() * 99999999).toString().padStart(8, '0');
 
-/* ══ DOWNLOAD ══ */
+/* ══ DOWNLOAD ══
+   Hide the "tap to sign" prompt before capturing so it doesn't appear in the image */
 function downloadCard() {
-  const prompt = document.getElementById('sig-prompt');
-  const sigImg = document.getElementById('card-sig-img');
-  if (sigImg.style.display === 'none') prompt.style.visibility = 'hidden';
+  var prompt = document.getElementById('sig-tap-prompt');
+  var hasSig = document.getElementById('card-sig-img').style.display !== 'none';
+  if (!hasSig) prompt.style.visibility = 'hidden';
 
-  const card = document.getElementById('id-card');
+  var card = document.getElementById('id-card');
   html2canvas(card, {
     scale: 3,
     useCORS: true,
     allowTaint: true,
     backgroundColor: THEMES[activeColor].cardBg,
-    width: card.offsetWidth,
-    height: card.offsetHeight,
-    scrollX: 0,
-    scrollY: 0,
-    windowWidth: document.documentElement.scrollWidth,
-    windowHeight: document.documentElement.scrollHeight,
   }).then(function(c) {
     prompt.style.visibility = '';
-    const a = document.createElement('a');
+    var a = document.createElement('a');
     a.download = 'moa-corporate-card.png';
     a.href = c.toDataURL('image/png');
     a.click();
