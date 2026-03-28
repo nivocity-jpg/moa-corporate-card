@@ -261,26 +261,6 @@ header p {
   pointer-events: none;
   font-size: 11px;
 }
-.card-select {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--txt-deep);
-  background: transparent;
-  border: none;
-  border-bottom: 1.5px dashed transparent;
-  outline: none;
-  width: auto;
-  max-width: 100%;
-  padding: 1px 16px 1px 0;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-  transition: border-bottom-color 0.2s, color 0.3s;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .card-select:focus { border-bottom-color: rgba(128,206,215,0.6); }
 .bias-pill-wrap {
   display: inline-flex;
@@ -292,25 +272,54 @@ header p {
   max-width: 100%;
   transition: background 0.3s;
 }
-.bias-pill-select {
+.bias-pill-text {
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 700;
   color: white;
-  background: transparent;
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  min-width: 0;
-  max-width: 160px;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+/* Plain text display for company on card */
+.card-val-display {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--txt-deep);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  max-width: 100%;
+  transition: color 0.3s;
 }
-.bias-pill-select option { background: #1e4d6b; color: white; }
+/* Selects in the controls bar */
+.ctrl-select-wrap { position: relative; }
+.ctrl-select-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+  font-size: 13px;
+}
+.ctrl-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--txt-deep);
+  background: rgba(238,247,255,0.85);
+  border: 1.5px solid rgba(128,206,215,0.45);
+  border-radius: 12px;
+  padding: 10px 36px 10px 14px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 44px;
+}
+.bias-pill-text option { background: #1e4d6b; color: white; }
 
 .card-fact-section {
   margin: 0 20px;
@@ -589,30 +598,13 @@ header p {
         <div class="card-field">
           <div class="card-lbl">TXT Bias</div>
           <div class="bias-pill-wrap" id="bias-pill-wrap">
-            <select class="bias-pill-select" id="card-bias">
-              <option value="">— Select —</option>
-              <option>Yeonjun (연준)</option>
-              <option>Soobin (수빈)</option>
-              <option>Beomgyu (범규)</option>
-              <option>Taehyun (태현)</option>
-              <option>Huening Kai (휴닝카이)</option>
-              <option>ALL OF THEM 😭</option>
-            </select>
+            <span class="bias-pill-text" id="bias-display">— Select below —</span>
           </div>
         </div>
 
         <div class="card-field">
           <div class="card-lbl">Company</div>
-          <div class="card-select-wrap">
-            <select class="card-select" id="card-company">
-              <option value="">— Select Company —</option>
-              <option>YJ Labels</option>
-              <option>Scoob Airlines</option>
-              <option>313FM</option>
-              <option>KT Engineering</option>
-              <option>International Huening Group (IHG)</option>
-            </select>
-          </div>
+          <div class="card-val-display" id="company-display">— Select below —</div>
         </div>
 
       </div>
@@ -653,6 +645,35 @@ header p {
         <div class="swatch"        data-color="#C3C4FC" style="background:#C3C4FC" onclick="pickSwatch(this)"></div>
         <div class="swatch"        data-color="#FAD4A0" style="background:#FAD4A0" onclick="pickSwatch(this)"></div>
         <div class="swatch"        data-color="#FDED54" style="background:#FDED54" onclick="pickSwatch(this)"></div>
+      </div>
+    </div>
+
+    <div class="ctrl-row">
+      <label class="ctrl-label" for="card-bias">TXT Bias</label>
+      <div class="ctrl-select-wrap">
+        <select class="ctrl-select" id="card-bias" onchange="updateBias(this.value)">
+          <option value="">— Select your bias —</option>
+          <option>Yeonjun (연준)</option>
+          <option>Soobin (수빈)</option>
+          <option>Beomgyu (범규)</option>
+          <option>Taehyun (태현)</option>
+          <option>Huening Kai (휴닝카이)</option>
+          <option>ALL OF THEM 😭</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="ctrl-row">
+      <label class="ctrl-label" for="card-company">Favourite Company</label>
+      <div class="ctrl-select-wrap">
+        <select class="ctrl-select" id="card-company" onchange="updateCompany(this.value)">
+          <option value="">— Select your company —</option>
+          <option>YJ Labels</option>
+          <option>Scoob Airlines</option>
+          <option>313FM</option>
+          <option>KT Engineering</option>
+          <option>International Huening Group (IHG)</option>
+        </select>
       </div>
     </div>
 
@@ -758,8 +779,9 @@ function applyTheme(hex) {
   document.getElementById('card-badge').style.background = t.badgeBg;
   document.getElementById('card-name').style.color       = t.nameColor;
   document.getElementById('bias-pill-wrap').style.background = t.pillBg;
-  document.getElementById('card-bias').style.color       = t.pillColor;
-  document.getElementById('card-company').style.color    = t.selectColor;
+  document.getElementById('bias-display').style.color        = t.pillColor;
+  document.getElementById('company-display').style.color     = t.bodyText;
+  document.querySelector('.ctrl-select-wrap .ctrl-select') && null; // selects stay default styled
   document.getElementById('card-fact-section').style.background  = t.factBg;
   document.getElementById('card-fact-section').style.borderColor = t.factBorder;
   document.getElementById('card-fact').style.color       = t.bodyText;
@@ -772,7 +794,15 @@ function applyTheme(hex) {
   document.querySelectorAll('.card-lbl,.card-sig-lbl,.card-fact-lbl').forEach(el => el.style.color = t.lblColor);
 }
 
-function pickSwatch(el) {
+function updateBias(val) {
+  document.getElementById('bias-display').textContent = val || '— Select below —';
+}
+
+function updateCompany(val) {
+  const el = document.getElementById('company-display');
+  el.textContent = val || '— Select below —';
+  el.style.color = THEMES[activeColor].selectColor || THEMES[activeColor].bodyText;
+}
   document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
   applyTheme(el.dataset.color);
