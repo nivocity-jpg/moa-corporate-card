@@ -183,21 +183,25 @@ header p {
   justify-content: center;
   flex-direction: column;
   gap: 4px;
+  z-index: 2;
 }
 .card-photo-slot input[type="file"] {
-  /* visually hidden but reachable by label */
   position: absolute;
   width: 1px; height: 1px;
   opacity: 0;
   left: 0; top: 0;
 }
+/* Image: fills slot as normal block, not absolute */
 .card-photo-slot img {
   position: absolute;
   inset: 0;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: top center;
   display: none;
   z-index: 1;
+  border-radius: 12px;
 }
 .photo-ph-icon { font-size: 26px; opacity: 0.35; }
 .photo-ph-txt  {
@@ -259,27 +263,32 @@ header p {
 }
 .card-select {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--txt-deep);
   background: transparent;
   border: none;
   border-bottom: 1.5px dashed transparent;
   outline: none;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   padding: 1px 16px 1px 0;
   cursor: pointer;
   -webkit-appearance: none;
   appearance: none;
   transition: border-bottom-color 0.2s, color 0.3s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-select:focus { border-bottom-color: rgba(128,206,215,0.6); }
 .bias-pill-wrap {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   background: linear-gradient(135deg, #80CED7, #3a9bbf);
   border-radius: 99px;
-  padding: 3px 10px;
+  padding: 4px 12px 4px 10px;
   max-width: 100%;
   transition: background 0.3s;
 }
@@ -295,7 +304,10 @@ header p {
   appearance: none;
   cursor: pointer;
   min-width: 0;
-  max-width: 180px;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 .bias-pill-select option { background: #1e4d6b; color: white; }
@@ -896,17 +908,22 @@ document.getElementById('card-idnum').textContent =
 
 /* ══ DOWNLOAD ══ */
 function downloadCard() {
-  // Temporarily hide the "tap to sign" prompt so it doesn't appear in the download
   const prompt = document.getElementById('sig-prompt');
-  const wasVisible = prompt.style.display !== 'none';
-  if (wasVisible && document.getElementById('card-sig-img').style.display === 'none') {
-    prompt.style.visibility = 'hidden';
-  }
-  html2canvas(document.getElementById('id-card'), {
+  const sigImg = document.getElementById('card-sig-img');
+  if (sigImg.style.display === 'none') prompt.style.visibility = 'hidden';
+
+  const card = document.getElementById('id-card');
+  html2canvas(card, {
     scale: 3,
     useCORS: true,
     allowTaint: true,
     backgroundColor: THEMES[activeColor].cardBg,
+    width: card.offsetWidth,
+    height: card.offsetHeight,
+    scrollX: 0,
+    scrollY: 0,
+    windowWidth: document.documentElement.scrollWidth,
+    windowHeight: document.documentElement.scrollHeight,
   }).then(function(c) {
     prompt.style.visibility = '';
     const a = document.createElement('a');
